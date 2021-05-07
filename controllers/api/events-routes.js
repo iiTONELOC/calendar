@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Events, User, Reminders} = require('../../models');
+const { Events, User, Reminders, Categories} = require('../../models');
 // const withAuth = require('../../utils/auth');
 
 
@@ -9,6 +9,10 @@ router.get('/', (req, res) => {
         include: [
             {
                 model: Reminders,
+            },
+            {
+                model: Categories,
+                attributes: ['name']
             },
             {
                 model: User,
@@ -32,6 +36,10 @@ router.get('/:id', (req, res) => {
         include: [
             {
                 model: Reminders,
+            },
+            {
+                model: Categories,
+                attributes: ['name']
             },
             {
                 model: User,

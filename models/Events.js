@@ -25,6 +25,13 @@ Events.init(
                 len: [1]
             }
         },
+        category_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'categories',
+                key: 'id'
+            }
+        },
         user_id: {
             type: DataTypes.INTEGER,
             references: {
@@ -39,6 +46,11 @@ Events.init(
         ends: {
             type: DataTypes.INTEGER,
             allowNull: false
+        },
+        important:{
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: true
         }
     },
     {

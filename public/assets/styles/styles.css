@@ -7,6 +7,17 @@
     background-color: rgba(0,0,0,.5);
 } */
 /* END UTIL */
+
+/* NAV */
+.nav-style{
+    color: rgb(255, 255, 255);
+}
+.nav-style:hover{
+    color: rgba(11, 112, 206, 1);
+    text-decoration-line: underline;
+}
+/* END NAV */
+
 /* HERO */
 .hero {
     background-image: url("/assets/images/calendar_logo.png");
@@ -16,9 +27,13 @@
     height: 350px;
 
 }
+.hero-bg{
+    background-color: rgb(28, 35, 46);
+    border-radius: 15px;
+}
 .sign-up-btn, .sign-in-btn{
     padding: 5px;
-    border-radius: 5px;
+    border-radius: 15px;
     font-size: larger;
     font-weight: bold;
 }
@@ -48,7 +63,7 @@
 .hero-title, .hero-date{
     color: seashell;
     font-size: 45px;
-    font-weight: bold;
+    font-weight: 400;
 }
 .hero-date{
     font-size: 35px;

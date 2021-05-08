@@ -4,6 +4,10 @@ const { User, Events, Reminders, Categories } = require('../../models');
 
 // get all users
 router.get('/', (req, res) => {
+    if(!req.session.loggedIn){
+        res.render('login')
+        return;
+    }
     User.findAll(
         { attributes: { exclude: ['password'] } }
     )
@@ -89,6 +93,7 @@ router.post('/login', (req, res) => {
             email: req.body.email
         }
     }).then(dbUserData => {
+        console.log(dbUserData)
         if (!dbUserData) {
             res.status(404).json({ message: 'No user with that email address!' });
             return;
@@ -105,8 +110,8 @@ router.post('/login', (req, res) => {
             req.session.user_id = dbUserData.id;
             req.session.username = dbUserData.username;
             req.session.loggedIn = true;
-
-            res.json({ user: dbUserData, message: `Welcome back, ${dbUserData.username}!` });
+        
+            res.status(201).json({ user: dbUserData, message: `Welcome back, ${dbUserData.username}!` });
         });
     });
 });

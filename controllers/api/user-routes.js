@@ -76,6 +76,8 @@ router.post('/', (req, res) => {
                 return res.sendStatus(202);
             }else if (eMsg === 'Validation isEmail on email failed'){
                 return res.sendStatus(400);
+            }else if(eMsg === 'Validation len on password failed'){
+                return res.sendStatus(411);
             }
         });
 });

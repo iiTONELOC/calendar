@@ -66,12 +66,17 @@ router.post('/', (req, res) => {
                 req.session.username = dbUserData.username;
                 req.session.loggedIn = true;
 
-                res.json(dbUserData);
+                res.sendStatus(201);
             });
         })
         .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
+            const eMsg = err.errors[0].message
+            console.log(`+++++++++++++++++++++\n${eMsg}`)
+            if(eMsg === 'user.email must be unique'){
+                return res.sendStatus(202);
+            }else if (eMsg === 'Validation isEmail on email failed'){
+                return res.sendStatus(400);
+            }
         });
 });
 
@@ -83,7 +88,7 @@ router.post('/login', (req, res) => {
         }
     }).then(dbUserData => {
         if (!dbUserData) {
-            res.status(400).json({ message: 'No user with that email address!' });
+            res.status(404).json({ message: 'No user with that email address!' });
             return;
         }
 

@@ -3,18 +3,18 @@
 .txt-shw-blk{
     text-shadow: black 1px 1px 1px;
 }
-.blk-filter{
+/* .blk-filter{
     background-color: rgba(0,0,0,.5);
-}
+} */
 /* END UTIL */
 /* HERO */
 .hero {
     background-image: url("/assets/images/calendar_logo.png");
-    background-position: center;
-    background-size: cover;
+    background-position: center center;
+    background-size: contain;
     background-repeat: no-repeat;
-    height: 650px;
-    border-radius: 5px;
+    height: 350px;
+
 }
 .sign-up-btn, .sign-in-btn{
     padding: 5px;

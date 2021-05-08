@@ -1,21 +1,28 @@
-<!-- ROW FOR HERO -->
-<div class="row bg-dark">
-    <div class="col hero d-flex flex-column justify-content-center">
-        <!-- BEGIN HERO -->
-        <section class="my-3  d-flex flex-wrap justify-content-center blk-filter p-3">
-            <div class='col-8 my-4 text-center text-info'>
-                <h1 class="hero-title txt-shw-blk">Welcome to My Calendar!</h1>
+<div class="col-12 d-flex flex-wrap justify-content-center">
+    <div>
+        <div class="col-12" style="height: 150px;">
+            <h1 class="text-white my-4">SIGN UP</h1>
+        </div>
+        <form>
+            <div class="mb-3">
+                <label for="email1" class="form-label text-white">Email address</label>
+                <input type="email" class="form-control" id="email1" aria-describedby="emailHelp"
+                    placeholder="name@email.com">
+                <div id="emailHelp" class="form-text text-danger"> </div>
             </div>
-            <div class='col-12 my-4 text-center '>
-                <h2 class="hero-date txt-shw-blk">Today is: Friday May 7<sup>th</sup>, 2021 <br>
-                    Current time: 7:04 PM</h2>
+            <div class="mb-3">
+                <label for="username" class="form-label text-white">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="User123">
+                <div id='userHelp' class="form-text">Please enter a username.</div>
             </div>
-            <div class="d-grid gap-2 col-4 mx-auto my-4">
-                <button class="sign-in-btn txt-shw-blk" type="button">LOG IN</button>
-                <button class="sign-up-btn txt-shw-blk" type="button">SIGN UP</button>
+            <div class="mb-3">
+                <label for="password1" class="form-label text-white">Password</label>
+                <input type="password" class="form-control" id="password1" placeholder="enter a password">
+                <div id='passHelp' class="form-text">Passwords must be at least 4 characters.</div>
             </div>
-        </section>
-        <!-- END HERO -->
+            <button id="submit-sgn-btn"type="btn" class="btn btn-info text-white">Submit</button>
+        </form>
     </div>
 </div>
-<!-- END ROW FOR HERO -->
+
+<script src="assets/javascript/sign-up.js"

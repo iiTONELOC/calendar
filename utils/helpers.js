@@ -13,7 +13,9 @@ module.exports = {
     // },
 
     render_mini_1: data => {
-      
+        if(data === undefined){
+            return '';
+        }
         const dates = data.map(el=>{
             if(el===0){
                 el="";

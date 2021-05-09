@@ -5,7 +5,7 @@ class CalRender {
     // year is 4 digit
     // month is single digit ex 1-9 10-12
     static createCalMonth(year, month)  {
-        return new calendar.Calendar(1).monthdayscalendar(year, month)
+        return new calendar.Calendar(6).monthdayscalendar(year, month)
     }
 }
 

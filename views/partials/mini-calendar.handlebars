@@ -1,5 +1,6 @@
-<div class="col-12 col-sm-12 col-md-6 col-lg-4  d-flex flex-wrap justify-content-center mini-container-width border border-secondary rounded-3 mt-4 bg-dark p-1">
-    
+<div
+    class="col-12 col-sm-12 col-md-6 col-lg-4  d-flex flex-wrap justify-content-center mini-container-width border border-secondary rounded-3 mt-4 bg-dark p-1">
+
     <div class="col-12 d-flex flex-wrap justify-content-center">
         <div class="col-6 text-center">
             <h2 class="mini-month">
@@ -10,15 +11,11 @@
             </h3>
         </div>
     </div>
-    
+
     <div id="mini-row-1" class="row row-cols-7 mt-5 mb-3 col-12 d-flex flex-wrap justify-content-center text-center">
-        <div id="mini-col" class="col">1</div>
-        <div id="mini-col" class="col">2</div>
-        <div id="mini-col" class="col">3</div>
-        <div id="mini-col" class="col">4</div>
-        <div id="mini-col" class="col">5</div>
-        <div id="mini-col" class="col">6</div>
-        <div id="mini-col" class="col">7</div>
+        {{#each row1}}
+        {{> mini-cols row1}}
+        {{/each}}
     </div>
 
     <div id="mini-row-2" class="row row-cols-7 mb-3 col-12 d-flex flex-wrap justify-content-center text-center">

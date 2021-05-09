@@ -50,7 +50,7 @@ Events.init(
         important:{
             type: DataTypes.BOOLEAN,
             allowNull: false,
-            defaultValue: true
+            defaultValue: false
         }
     },
     {

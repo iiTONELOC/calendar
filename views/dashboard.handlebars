@@ -1,24 +1,46 @@
-<!-- ROW FOR MONTH -->
-<div class="row">
-    <div class="col">
-        1 of 3
+<!-- ROW FOR CALENDAR-->
+<div class="row row-cols-1 p-1">
+    <div class="col-12 d-flex flex-wrap justify-content-center">
+        <div class="col-6 d-flex flex-wrap justify-content-start align-items-center mt-2">
+            <h1 class="dash-title text-start"><span><img class="dash-icon"
+                        src="assets/images/calendar_logo.png"></span>My Calendar</h1>
+        </div>
+        <div class="col-6 d-flex flex-wrap justify-content-end mt-2">
+            <h2 id='date' class="dash-date col-12 text-end mt-3"></h2>
+            <span id="time" class="dash-time col-12 text-end"> </span>
+        </div>
     </div>
-    <div class="col">
-        2 of 3
-    </div>
-    <div class="col">
-        3 of 3
-    </div>
-</div>
-<!-- END ROW FOR MONTH -->
+    <div class="col spacer border-bottom border-success">
 
-<!-- ROW FOR DAILY LINE-UP -->
-<div class="row">
-    <div class="col">
-        1 of 2
     </div>
-    <div class="col">
-        2 of 2
+    <div class="col-12 mt-5 d-flex flex-wrap justify-content-center">
+        {{!-- div that holds calendars --}}
+        <div class="row row-cols-1 mini-bg">
+            {{!-- div for mini-calendar --}}
+            <div class="col-12 d-flex flex-wrap justify-content-center ">
+                <div class="p-1 col-12 d-flex flex-wrap justify-content-center">
+                    {{!-- mini partial goes here --}}
+                    {{>mini-calendar}}
+                    {{!-- end partial --}}
+                </div>
+
+            </div>
+            {{!-- end div for mini-calendar --}}
+
+            {{!-- div for calendar/daily/weekly/monthly--}}
+            <div class="col-12 d-flex flex-wrap justify-content-center">
+                <div class="p-3 d-flex flex-wrap justify-content-center">
+                    {{!-- view partial goes here --}}
+                    {{>calendar-views}}
+                    {{!-- end partial --}}
+                </div>
+            </div>
+            {{!-- end div for calendar --}}
+        </div>
+        {{!-- end div that holds calendars --}}
     </div>
 </div>
-<!-- END DAILY ROW -->
+<!-- END ROW FOR CALENDAR-->
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.js"></script>
+<script src='assets/javascript/dashboard.js'

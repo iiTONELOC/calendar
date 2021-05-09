@@ -6,8 +6,9 @@ router.get('/', (req,res) => {
         return;
     }
     loggedIn = req.session.loggedIn
+    const deflt = true
     res.render('dashboard',{
-        loggedIn
+        loggedIn, deflt
     })
 })
 

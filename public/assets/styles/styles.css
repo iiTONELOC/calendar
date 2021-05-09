@@ -1,71 +1,131 @@
-
 /* UTIL STYLES */
-.txt-shw-blk{
+
+.txt-shw-blk {
     text-shadow: black 1px 1px 1px;
 }
+
 /* .blk-filter{
     background-color: rgba(0,0,0,.5);
 } */
+
 /* END UTIL */
 
 /* NAV */
-.nav-style{
+
+.nav-style {
     color: rgb(255, 255, 255);
 }
-.nav-style:hover{
+
+.nav-style:hover {
     color: rgba(11, 112, 206, 1);
     text-decoration-line: underline;
 }
+
 /* END NAV */
 
 /* HERO */
+
 .hero {
     background-image: url("/assets/images/calendar_logo.png");
     background-position: center center;
     background-size: contain;
     background-repeat: no-repeat;
     height: 350px;
-
 }
-.hero-bg{
+
+.hero-bg {
     background-color: rgb(28, 35, 46);
     border-radius: 15px;
 }
-.sign-up-btn, .sign-in-btn{
+
+.sign-up-btn, .sign-in-btn {
     padding: 5px;
     border-radius: 15px;
     font-size: larger;
     font-weight: bold;
 }
-.sign-in-btn{
-    color: seashell;
+
+.sign-in-btn {
+    color: rgba(255, 245, 238, 0.835);
     background-color: rgba(11, 206, 44, 0.6);
     border: 1px solid rgba(11, 206, 44, 0.6);
 }
-.sign-in-btn:hover{
-    color: seashell;
+
+.sign-in-btn:hover {
+    color: rgba(255, 245, 238, 0.835);
     background-color: rgba(11, 206, 44, 1);
     border: 1px solid rgba(11, 206, 44, 0.6);
     text-decoration-line: underline;
 }
-.sign-up-btn{
-    color: seashell;
+
+.sign-up-btn {
+    color: rgba(255, 245, 238, 0.835);
     background-color: rgba(11, 112, 206, 0.6);
     border: 1px solid rgba(11, 112, 206, 0.6);
 }
-.sign-up-btn:hover{
-    color: seashell;
+
+.sign-up-btn:hover {
+    color: rgba(255, 245, 238, 0.835);
     background-color: rgba(11, 112, 206, 1);
     border: 1px solid rgba(11, 112, 206, 0.6);
     text-decoration-line: underline;
 }
 
-.hero-title, .hero-date{
-    color: seashell;
+.hero-title, .hero-date {
+    color: rgba(255, 245, 238, 0.835);
     font-size: 45px;
     font-weight: 400;
 }
-.hero-date{
+
+.hero-date {
     font-size: 35px;
 }
+
 /* END HERO */
+
+.dash-title {
+    font-size: 25px;
+    color: rgba(255, 245, 238, 0.835);
+}
+
+.dash-icon {
+    height: 30px;
+    margin-right: 5px;
+    margin-bottom: 8px;
+}
+
+.dash-date {
+    font-size: 20px;
+    color: rgba(255, 245, 238, 0.835);
+}
+.dash-time{
+    color: rgba(255, 245, 238, 0.835);
+}
+
+.spacer {
+    height: 50px;
+}
+
+.mini-container-width {
+    min-width: 300px;
+}
+
+.mini-bg {
+    border: 2px solid rgb(22, 22, 22);
+    background-color: rgb(22, 22, 22);
+    border-radius: 10px;
+}
+.mini-month{
+    color: rgba(255, 245, 238, 0.835);
+    text-decoration-line: underline;
+}
+
+.mini-year {
+    font-size: 17px;
+    color: dimgray;
+}
+#mini-row-1,#mini-row-2,#mini-row-3,#mini-row-4,#mini-row-5{
+    color: rgba(255, 245, 238, 0.835);
+}
+
+/* DASHBOARD */

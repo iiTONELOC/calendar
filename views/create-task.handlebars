@@ -1,26 +1,48 @@
 <div class="col-12 d-flex flex-wrap justify-content-center">
-    <div>
-        <div class="col-12" style="height: 150px;">
-            <h1 class="text-white my-4">Create a New Task</h1>
+
+    <div class="col-12 text-center" style="height: 150px;">
+        <h1 class="text-white my-4">Create a New Task</h1>
+    </div>
+
+    <div class="col-6">
+        <div class="row g-3 ">
+            <div class="col-md-6">
+                <label for="date" class="form-label text-white">Select Date</label>
+                <input type="date" class="form-control bg-dark text-white" id="date">
+            </div>
+            <div class="col-md-6">
+                <label for="time" class="form-label text-white">Enter Time</label>
+                <input type="time" class="form-control bg-dark text-white" id="time">
+            </div>
+            <div class="col-12">
+                <label for="title" class="form-label text-white">Enter Event Name</label>
+                <input type="text" class="form-control bg-dark text-white" id="title" placeholder="Meet Bill">
+            </div>
+            <div class="col-12">
+                <label for="description" class="form-label text-white">Enter Event Description</label>
+                <input type="text-area" class="form-control bg-dark text-white " id="description" placeholder="Coffee and bagels">
+            </div>
+            <div class="col-md-6">
+                <label for="category" class="form-label text-white">Select a Category</label>
+                <select name='category' id="category" class=" bg-dark text-white">
+                    <option  value="1" class="bg-dark text-white">Medical</option>
+                    <option  value="2" class="bg-dark text-white">Travel</option>
+                    <option  value="3" class="bg-dark text-white">Personal</option>
+                    <option  value="4" class="bg-dark text-white">Other</option>
+                </select>
+            </div>
+            <div class="col-12">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="important">
+                    <label class="form-check-label text-white" for="important">
+                        Check this box for events that can't be missed
+                    </label>
+                </div>
+            </div>
+            <div class="col-12">
+                <button id="create-task-btn" class="btn btn-info text-white shadow">Create Task</button>
+            </div>
         </div>
-        <form>
-            <div class="mb-3">
-                <label for="email1" class="form-label text-white">Email address</label>
-                <input type="email" class="form-control" id="email1" aria-describedby="emailHelp"
-                    placeholder="name@email.com">
-                <div id="emailHelp" class="form-text text-danger"> </div>
-            </div>
-            <div class="mb-3">
-                <label for="username" class="form-label text-white">Username</label>
-                <input type="text" class="form-control" id="username" placeholder="User123">
-                <div id='userHelp' class="form-text text-danger"> </div>
-            </div>
-            <div class="mb-3">
-                <label for="password1" class="form-label text-white">Password</label>
-                <input type="password" class="form-control" id="password1" placeholder="enter a password">
-                <div id='passHelp' class="form-text text-danger"> </div>
-            </div>
-            <button id="submit-sgn-btn"type="btn" class="btn btn-info text-white my-5">Submit</button>
-        </form>
     </div>
 </div>
+<script src="assets/javascript/create-task.js"

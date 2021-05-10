@@ -39,12 +39,12 @@ Events.init(
                 key: 'id'
             }
         },
-        starts: {
-            type: DataTypes.INTEGER,
+        date: {
+            type: DataTypes.STRING,
             allowNull: false
         },
-        ends: {
-            type: DataTypes.INTEGER,
+        time: {
+            type: DataTypes.STRING,
             allowNull: false
         },
         important:{

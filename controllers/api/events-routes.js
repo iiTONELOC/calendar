@@ -69,7 +69,10 @@ router.post('/',  (req, res) => {
         starts: req.body.starts,
         ends: req.body.ends
     })
-        .then(dbPostData => res.json(dbPostData))
+        .then(dbPostData => res.status(201).send({
+            data: dbPostData,
+            
+        }))
         .catch(err => {
             console.log(err);
             res.status(500).json(err);

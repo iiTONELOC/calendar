@@ -48,5 +48,11 @@ module.exports = {
         return weekDays
     },
 
+    render_events: (data) =>{
+        return data.map(el=>{
+            return el.day
+        }).join(" ")
+    }
+
 }
 

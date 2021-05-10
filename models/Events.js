@@ -51,6 +51,18 @@ Events.init(
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false
+        },
+        month: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        day: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        year: {
+            type: DataTypes.INTEGER,
+            allowNull: false
         }
     },
     {

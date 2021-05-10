@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Events, User, Reminders, Categories} = require('../../models');
+const { Events, User, Reminders, Categories } = require('../../models');
 // const withAuth = require('../../utils/auth');
 
 
@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
             },
             {
                 model: User,
-                attributes: ['username']
+                attributes: ['username', 'id']
             }
         ]
     })
@@ -32,7 +32,7 @@ router.get('/:id', (req, res) => {
         where: {
             id: req.params.id
         },
-        
+
         include: [
             {
                 model: Reminders,
@@ -60,8 +60,13 @@ router.get('/:id', (req, res) => {
         });
 });
 
-router.post('/',  (req, res) => {
-    
+router.post('/', (req, res) => {
+    let d = req.body.date;
+    m = d.split('-')[0];
+    da = d.split('-')[1];
+    y = d.split('-')[2];
+
+    console.log(m, da, y)
     Events.create({
         name: req.body.name,
         description: req.body.description,
@@ -69,11 +74,14 @@ router.post('/',  (req, res) => {
         user_id: req.body.user_id,
         date: req.body.date,
         time: req.body.time,
-        important: req.body.important
+        important: req.body.important,
+        month: m,
+        day: da,
+        year: y,
     })
         .then(dbPostData => res.status(201).send({
             data: dbPostData,
-            
+
         }))
         .catch(err => {
             console.log(err);
@@ -81,7 +89,7 @@ router.post('/',  (req, res) => {
         });
 });
 
-router.put('/:id',  (req, res) => {
+router.put('/:id', (req, res) => {
     Events.update(
         req.body,
         {
@@ -103,7 +111,7 @@ router.put('/:id',  (req, res) => {
         });
 });
 
-router.delete('/:id',  (req, res) => {
+router.delete('/:id', (req, res) => {
     Events.destroy({
         where: {
             id: req.params.id

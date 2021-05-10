@@ -145,5 +145,7 @@
 .mini-cal-container, .mini-container-width{
     width: 307px;
 }
-
+.current-event{
+    background-color: red;
+}
 /* end mini cal */

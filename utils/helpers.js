@@ -22,7 +22,7 @@ module.exports = {
                 el = "";
             }
             // MAKE A FUNCTION THAT CHECKS FOR REMINDERS AND ADD IN SPAN
-            return (`<div id="mini-col-${el}" class="col"><p id=mini-date-${el}>${el}<br><span id='reminder-${el}'> </span></p></div>`)
+            return (`<div id="mini-col-${el}" class="col half-coll"><p id=mini-date-${el}>${el}<br><span id='reminder-${el}'> </span></p></div>`)
         }).join(" ")
         return dates
     },
@@ -42,7 +42,7 @@ module.exports = {
             "S"
         ]
         const weekDays = days.map(el=>{
-            return (`<div id="mini-col-${el}" class="col"><p id=${el}>${el}</p></div>`)
+            return (`<div id="mini-col-${el}" class="col half-coll"><p id=${el}>${el}</p></div>`)
         }).join(" ")
 
         return weekDays

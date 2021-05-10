@@ -2,7 +2,8 @@ const calendar = require('node-calendar');
 const moment = require('moment');
 
 class CalRender {
-    /* Creates matrix of monthly layout
+    /* 
+    /* Creates object of monthly layout
     /* If year and month are blank
     /* will create for current month
     */  

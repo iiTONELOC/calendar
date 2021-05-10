@@ -106,9 +106,9 @@
     height: 50px;
 }
 
-.mini-container-width {
+/* .mini-container-width {
     min-width: 300px;
-}
+} */
 
 .mini-bg {
     border: 2px solid rgb(22, 22, 22);
@@ -129,6 +129,9 @@
 }
 
 /* DASHBOARD */
+.user-welcome{
+    color: rgba(255, 245, 238, 0.835);
+}
 /* mini cal */
 .mini-current-date{
     background-color: coral;
@@ -136,4 +139,11 @@
     color: black;
     
 }
+.half-coll{
+    max-width: 40px;
+}
+.mini-cal-container, .mini-container-width{
+    width: 307px;
+}
+
 /* end mini cal */

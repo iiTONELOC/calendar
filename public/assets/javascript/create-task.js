@@ -1,20 +1,21 @@
-let eventName = document.querySelector('#title').value;
-let description = document.querySelector('#description').value.trim();
-let date = document.querySelector('#date').value;
-let time = document.querySelector('#time').value;
-let important = document.querySelector('#important').value;
-let category = document.querySelector('#category').value;
+
 const btn = document.getElementById('create-task-btn');
 
 
 
- function createTaskFormHandler (event){
+function createTaskFormHandler(event) {
     event.preventDefault()
-    console.log(eventName)
-    if(eventName && description && date && time && category ){
+    const eventName = document.querySelector('#title').value.trim();
+    const description = document.querySelector('#description').value.trim();
+    const date = moment(document.querySelector('#date').value).format('MM-DD-YYYY');
+    const time = document.querySelector('#time').value;
+    const important = document.querySelector('#important').checked;
+    const category = document.querySelector('#category').value;
+
+    if (eventName && description && date && time && category) {
         console.log("yes")
-        console.log(eventName,description,date,time,important,category)
-    }else{
+        console.log(eventName, description, date, time, important, category)
+    } else {
         console.log("no")
     }
 }
@@ -29,5 +30,5 @@ const btn = document.getElementById('create-task-btn');
 
 
 
-btn.addEventListener("click",createTaskFormHandler)
+btn.addEventListener("click", createTaskFormHandler)
 

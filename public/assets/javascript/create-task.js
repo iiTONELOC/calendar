@@ -30,7 +30,8 @@ async function createTaskFormHandler(event) {
         });
 
         if(response.status === 201){
-            alert(`SUCCESS\n ${name} was successfully added to events!`)
+            alert(`SUCCESS\n ${name} was successfully added to events!`);
+            window.location.replace('/dashboard');
         }
 
     } else {

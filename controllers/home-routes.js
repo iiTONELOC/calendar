@@ -1,7 +1,18 @@
 const router = require('express').Router();
+const CalRender = require("../utils/render-calendar")
 
-router.get('/', (req,res) => {
+router.get('/', async (req, res) => {
+    loggedIn = req.session.loggedIn
+    if (loggedIn) {
+        const deflt = true
+        const month = await CalRender.createCalMonth()
+        res.render('dashboard', {
+            loggedIn, deflt, month
+        })
+        return
+    }
     res.render('home')
+
 })
 
 router.get('/login', (req, res) => {
@@ -21,4 +32,15 @@ router.get('/sign-up', (req, res) => {
 
     res.render('sign-up');
 });
+
+router.get('/create-task', (req, res) => {
+    if (!req.session.loggedIn) {
+        res.redirect('/login');
+        return;
+    }
+    loggedIn = req.session.loggedIn
+    res.render('create-task', {
+        loggedIn
+    })
+})
 module.exports = router

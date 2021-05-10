@@ -7,20 +7,11 @@ router.get('/', async (req, res) => {
     }
     loggedIn = req.session.loggedIn
     const deflt = true
-    const month = await CalRender.createCalMonth(05, 2021)
-    try {
-        return month;
-    }
-    catch (e) {
-        if (e) {
-            console.log(e)
-        }
-    }
-    finally {
-        res.render('dashboard', {
-            loggedIn, deflt, month
-        })
-    }
+    const month = await CalRender.createCalMonth()
+    res.render('dashboard', {
+        loggedIn, deflt, month
+    })
+
 
 })
 

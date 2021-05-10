@@ -1,12 +1,21 @@
 const calendar = require('node-calendar');
+const moment = require('moment');
 
 class CalRender {
-    // function to return month
-    // year is 4 digit
-    // month is single digit ex 1-9 10-12
+    /* Creates matrix of monthly layout
+    /* If year and month are blank
+    /* will create for current month
+    */  
     static async createCalMonth(month, year) {
-        const data = new calendar.Calendar(6).monthdayscalendar(year, month)
-
+        let m = month
+        let y = year
+        if (m === undefined ) {
+            m = moment(new Date()).format('M')
+        }if (y === undefined) {
+            y = moment(new Date()).format('YYYY')
+        }
+        const data = new calendar.Calendar(6).monthdayscalendar(y,m)
+        
         return {
             row1: data[0],
             row2: data[1],

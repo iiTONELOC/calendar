@@ -8,7 +8,11 @@ const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const sess = {
     secret: process.env.SESSION_SECRET,
-    cookie: {maxAge:300000},
+    cookie: {
+        maxAge:8640000000,
+        sameSite:"Strict",
+        secure: false
+    },
     resave: false,
     saveUninitialized: true,
     rolling: true,
@@ -20,7 +24,10 @@ const helpers = require('./utils/helpers');
 const hbs = exphbs.create({ helpers });
 const app = express();
 const PORT = process.env.PORT || 3001;
-
+if(process.env.PORT){
+    app.set('trust proxy',1)
+    sess.cookie.secure = true
+}
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 

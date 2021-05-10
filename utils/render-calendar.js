@@ -4,7 +4,7 @@ class CalRender {
     // function to return month
     // year is 4 digit
     // month is single digit ex 1-9 10-12
-    static createCalMonth(month, year) {
+    static async createCalMonth(month, year) {
         const data = new calendar.Calendar(6).monthdayscalendar(year, month)
 
         return {

@@ -124,8 +124,16 @@
     font-size: 17px;
     color: dimgray;
 }
-#mini-col{
+.col{
     color: rgba(255, 245, 238, 0.835);
 }
 
 /* DASHBOARD */
+/* mini cal */
+.mini-current-date{
+    background-color: coral;
+    border-radius: 50%;
+    color: black;
+    
+}
+/* end mini cal */

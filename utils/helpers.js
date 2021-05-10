@@ -21,14 +21,32 @@ module.exports = {
             if (el === 0) {
                 el = "";
             }
-            return (`<div id="mini-col" class="col">${el}</div>`)
+            // MAKE A FUNCTION THAT CHECKS FOR REMINDERS AND ADD IN SPAN
+            return (`<div id="mini-col-${el}" class="col"><p id=mini-date-${el}>${el}<br><span id='reminder-${el}'> </span></p></div>`)
         }).join(" ")
         return dates
     },
 
     display_date: () => {
        return moment(new Date()).format('dddd [the] Do [of] MMMM');
-    }
+    },
+
+    render_week_days: () =>{
+        const days = [
+            "S",
+            "M",
+            "T",
+            "W",
+            "Th",
+            "F",
+            "S"
+        ]
+        const weekDays = days.map(el=>{
+            return (`<div id="mini-col-${el}" class="col"><p id=${el}>${el}</p></div>`)
+        }).join(" ")
+
+        return weekDays
+    },
 
 }
 

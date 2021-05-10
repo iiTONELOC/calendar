@@ -8,8 +8,11 @@ currentDayEl.setAttribute('class', 'mini-current-date')
 // get list of days with events
 const eventData = document.querySelector(".mini-month").getAttribute('data-events');
 let eventArray = eventData.split(" ")
-for (let i = 0; i < eventArray.length; i++) {
-    const element = eventArray[i];
-    document.getElementById(`mini-date-${element}`).setAttribute('class', 'current-event')
+if(eventArray.length>0){
+    for (let i = 0; i < eventArray.length; i++) {
+        const element = eventArray[i];
+        document.getElementById(`mini-date-${element}`).setAttribute('class', 'current-event')
+    }
 }
+
 

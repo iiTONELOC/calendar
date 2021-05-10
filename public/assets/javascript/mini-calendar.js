@@ -11,6 +11,9 @@ let eventArray = eventData.split(" ")
 if(eventArray.length>0){
     for (let i = 0; i < eventArray.length; i++) {
         const element = eventArray[i];
+        if(element === 0){
+            element = ''
+        }
         document.getElementById(`mini-date-${element}`).setAttribute('class', 'current-event')
     }
 }

@@ -31,5 +31,8 @@ Events.hasMany(Reminders, {
 Categories.hasMany(Events, {
     foreignKey: 'category_id'
 })
+Events.belongsTo(Categories, {
+    foreignKey: 'category_id'
+})
 
 module.exports = { User, Events, Reminders, Categories };

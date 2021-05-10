@@ -65,9 +65,11 @@ router.post('/',  (req, res) => {
     Events.create({
         name: req.body.name,
         description: req.body.description,
-        user_id: req.session.user_id,
-        starts: req.body.starts,
-        ends: req.body.ends
+        category_id: req.body.user_id,
+        user_id: req.body.user_id,
+        date: req.body.date,
+        time: req.body.time,
+        important: req.body.important
     })
         .then(dbPostData => res.status(201).send({
             data: dbPostData,

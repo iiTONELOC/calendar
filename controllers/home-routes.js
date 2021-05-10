@@ -41,8 +41,9 @@ router.get('/create-task', (req, res) => {
         return;
     }
     loggedIn = req.session.loggedIn
+    const user_id = req.session.user_id;
     res.render('create-task', {
-        loggedIn
+        loggedIn, user_id
     })
 })
 module.exports = router

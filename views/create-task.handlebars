@@ -2,7 +2,12 @@
 
     <div class="col-12 text-center" style="height: 150px;">
         <h1 class="text-white my-4">Create a New Task</h1>
+        <div id="task-alert" class="col-12 text-center collapse" style="height: 150px;">
+            <h3 class="text-danger my-4 text-center">Fields Cannot Be Blank!</h3>
+        </div>
     </div>
+
+
 
     <div class="col-6">
         <div class="row g-3 ">
@@ -20,15 +25,16 @@
             </div>
             <div class="col-12">
                 <label for="description" class="form-label text-white">Enter Event Description</label>
-                <input type="text-area" class="form-control bg-dark text-white " id="description" placeholder="Coffee and bagels">
+                <input type="text-area" class="form-control bg-dark text-white " id="description"
+                    placeholder="Coffee and bagels">
             </div>
             <div class="col-md-6">
                 <label for="category" class="form-label text-white">Select a Category</label>
                 <select name='category' id="category" class=" bg-dark text-white">
-                    <option  value="1" class="bg-dark text-white">Medical</option>
-                    <option  value="2" class="bg-dark text-white">Travel</option>
-                    <option  value="3" class="bg-dark text-white">Personal</option>
-                    <option  value="4" class="bg-dark text-white">Other</option>
+                    <option value="1" class="bg-dark text-white">Medical</option>
+                    <option value="2" class="bg-dark text-white">Travel</option>
+                    <option value="3" class="bg-dark text-white">Personal</option>
+                    <option value="4" class="bg-dark text-white">Other</option>
                 </select>
             </div>
             <div class="col-12">
@@ -40,7 +46,7 @@
                 </div>
             </div>
             <div class="col-12">
-                <button id="create-task-btn" class="btn btn-info text-white shadow">Create Task</button>
+                <button id="create-task-btn" data-user_id="{{user_id}}" class="btn btn-info text-white shadow">Create Task</button>
             </div>
         </div>
     </div>

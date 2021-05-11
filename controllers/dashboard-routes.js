@@ -2,7 +2,8 @@ const router = require('express').Router();
 const CalRender = require('../utils/render-calendar');
 const Events = require('../models/Events');
 const Reminders = require('../models/Reminders');
-const Categories = require('../models/Categories')
+const Categories = require('../models/Categories');
+
 
 router.get('/', async (req, res) => {
     if (!req.session.loggedIn) {
@@ -15,7 +16,7 @@ router.get('/', async (req, res) => {
     const deflt = true
     const month = await CalRender.createCalMonth()
 
-
+    
     let response = await Events.findAll({
         where: {
             user_id: user_id,

@@ -49,6 +49,9 @@ module.exports = {
     },
 
     render_events: (data) =>{
+        if(data === undefined){
+            return ''
+        }
         return data.map(el=>{
             return el.day
         }).join(" ")

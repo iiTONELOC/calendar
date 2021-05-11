@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
         const user = req.session.username
         const user_id = req.session.user_id;
         const deflt = true
-        const month = await CalRender.createCalMonth()
+        const month = await CalRender.createCalMonth().then(res=>{return res});
         res.render('dashboard', {
             loggedIn, deflt, month, user, user_id
         })

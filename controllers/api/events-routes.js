@@ -79,10 +79,9 @@ router.post('/', (req, res) => {
         day: da,
         year: y,
     })
-        .then(dbPostData => res.status(201).send({
-            data: dbPostData,
-
-        }))
+        .then(dbPostData => res.status(201).json(
+            {id: dbPostData.id}
+        ))
         .catch(err => {
             console.log(err);
             res.status(500).json(err);

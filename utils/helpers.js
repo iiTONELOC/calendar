@@ -22,7 +22,7 @@ module.exports = {
                 el = "";
             }
             // MAKE A FUNCTION THAT CHECKS FOR REMINDERS AND ADD IN SPAN
-            return (`<div id="mini-col-${el}" class="col half-coll"><p id=mini-date-${el}>${el}<br><span id='reminder-${el}'> </span></p></div>`)
+            return (`<div id="mini-col-${el}" class="col half-coll text-center p-2"><p id=mini-date-${el}>${el}<br><span id='reminder-${el}'> </span></p></div>`)
         }).join(" ")
         return dates
     },

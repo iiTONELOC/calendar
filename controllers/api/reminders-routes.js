@@ -32,13 +32,13 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/',  (req, res) => {
-    
+    console.log(req.body)
     Reminders.create({
         user_id: req.session.user_id,
         event_id: req.body.event_id,
         before: req.body.before,
     })
-        .then(dbRemindData => res.json(dbRemindData))
+        .then(dbRemindData => res.status(200).json(dbRemindData))
         .catch(err => {
             console.log(err);
             res.status(400).json(err);

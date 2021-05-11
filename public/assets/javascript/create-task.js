@@ -48,6 +48,8 @@ async function createTaskFormHandler(event) {
                 document.getElementById('create-reminder-btn').setAttribute('data-event_id',`${response.id}`)
                 show(addReminderConfirm);
                 // window.location.replace('/dashboard');
+        }).catch(e=>{
+            console.log(e)
         })
             
         

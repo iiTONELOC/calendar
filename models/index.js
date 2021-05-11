@@ -16,7 +16,7 @@ Reminders.belongsTo(User, {
 });
 
 Reminders.belongsTo(Events, {
-    foreignKey: 'events_id',
+    foreignKey: 'id',
     onDelete: 'CASCADE'
 });
 
@@ -25,7 +25,7 @@ User.hasMany(Reminders, {
 });
 
 Events.hasMany(Reminders, {
-    foreignKey: 'reminders_id',
+    foreignKey: 'event_id',
     onDelete: "CASCADE"
 });
 Categories.hasMany(Events, {

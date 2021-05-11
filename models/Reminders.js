@@ -29,7 +29,7 @@ Reminders.init(
             }
         },
         before: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.DATE,
             allowNull: false
         }
     },

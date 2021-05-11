@@ -20,14 +20,6 @@ Reminders.init(
                 key: 'id'
             }
         },
-        event_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'events',
-                key: 'id'
-            }
-        },
         before: {
             type: DataTypes.DATE,
             allowNull: false

@@ -15,7 +15,6 @@ const hide = (element) => {
 
 async function createTaskFormHandler(event) {
     event.preventDefault()
-    console.log('HERE')
     const name = document.querySelector('#title').value.trim();
     const description = document.querySelector('#description').value.trim();
     const date = moment(document.querySelector('#date').value).format('MM-DD-YYYY');
@@ -47,14 +46,9 @@ async function createTaskFormHandler(event) {
                 document.getElementById('success-title').textContent=(`${name} has been created for ${date} at ${time}`)
                 document.getElementById('create-reminder-btn').setAttribute('data-event_id',`${response.id}`)
                 show(addReminderConfirm);
-                // window.location.replace('/dashboard');
         }).catch(e=>{
             console.log(e)
         })
-            
-        
-
-
     } else {
         show(taskAlert);
         function remove() {

@@ -2,9 +2,11 @@ const router = require('express').Router();
 const { User, Events, Reminders, Categories } = require('../../models');
 
 
+
+
 // get all users
 router.get('/', (req, res) => {
-    if(!req.session.loggedIn){
+    if (!req.session.loggedIn) {
         res.render('login')
         return;
     }
@@ -31,7 +33,7 @@ router.get('/:id', (req, res) => {
                     model: Categories,
                     attributes: ['name']
                 }
-                
+
             },
             {
                 model: Reminders,
@@ -40,7 +42,7 @@ router.get('/:id', (req, res) => {
                     attributes: ['name']
                 }
             },
-            
+
         ]
     })
         .then(dbUserData => {
@@ -56,7 +58,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
-router.post('/', (req, res) => {
+router.post('/', (req, res,) => {
     // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
     User.create({
         username: req.body.username,
@@ -64,25 +66,24 @@ router.post('/', (req, res) => {
         password: req.body.password
     })
         .then(dbUserData => {
-            
+
             req.session.save(() => {
                 req.session.user_id = dbUserData.id;
                 req.session.username = dbUserData.username;
                 req.session.loggedIn = true;
 
-                res.status(201).json({user:dbUserData});
-                
-            });
-            return
+                res.status(201).json({ user: dbUserData });
+                return
+            })
         })
         .catch(err => {
             const eMsg = err.errors[0].message
             console.log(`+++++++++++++++++++++\n${eMsg}`)
-            if(eMsg === 'user.email must be unique'){
+            if (eMsg === 'user.email must be unique') {
                 return res.sendStatus(202);
-            }else if (eMsg === 'Validation isEmail on email failed'){
+            } else if (eMsg === 'Validation isEmail on email failed') {
                 return res.sendStatus(400);
-            }else if(eMsg === 'Validation len on password failed'){
+            } else if (eMsg === 'Validation len on password failed') {
                 return res.sendStatus(411);
             }
         });
@@ -106,12 +107,12 @@ router.post('/login', (req, res) => {
             res.status(400).json({ message: 'Incorrect password!' });
             return;
         }
-        
+
         req.session.save(() => {
             req.session.user_id = dbUserData.id;
             req.session.username = dbUserData.username;
             req.session.loggedIn = true;
-        
+
             res.status(201).json({ user: dbUserData, message: `Welcome back, ${dbUserData.username}!` });
         });
     });
@@ -170,4 +171,4 @@ router.delete('/:id', (req, res) => {
         });
 });
 
-module.exports = router;
+module.exports = router

@@ -38,6 +38,9 @@ class CalRender {
     static currentYear() {
         return moment(new Date()).format('YYYY')
     }
+    static currentDate(){
+        return moment(new Date()).format("YYYY-MM-DD")
+    }
 }
 
 

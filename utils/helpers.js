@@ -1,4 +1,5 @@
 const moment = require('moment');
+const renderReminders = require('./mini-reminders');
 module.exports = {
     // format_date: date => {
     //     return `${new Date(date).getMonth() + 1}/${new Date(date).getDate()}/${new Date(
@@ -22,7 +23,7 @@ module.exports = {
                 el = "";
             }
             // MAKE A FUNCTION THAT CHECKS FOR REMINDERS AND ADD IN SPAN
-            return (`<div id="mini-col-${el}" class="col half-coll text-center p-2"><p id=mini-date-${el}>${el}<br><span id='reminder-${el}'> </span></p></div>`)
+            return (`<div id="mini-col-${el}" class="col half-coll text-center p-2"><p id=mini-date-${el}>${el}<br><span id='reminder-${el}'>${renderReminders()}</span></p></div>`)
         }).join(" ")
         return dates
     },
@@ -49,7 +50,9 @@ module.exports = {
     },
 
     render_events: (data) =>{
+        // ADDs LIST OF EVENTS TO MONTH TITLE ON MINI CALENDAR
         if(data === undefined){
+            // INSTEAD OF RETURNING EMPTY TRY TO FETCH CALENDAR AGAIN
             return ''
         }
         return data.map(el=>{

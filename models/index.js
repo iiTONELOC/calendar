@@ -15,8 +15,13 @@ Reminders.belongsTo(User, {
     foreignKey: 'user_id',
 });
 
-Reminders.belongsTo(Events, {
-    foreignKey: 'id',
+Reminders.hasMany(Events, {
+    foreignKey: 'reminder_id',
+    onDelete: "CASCADE"
+});
+
+Events.belongsTo(Reminders, {
+    foreignKey: 'reminder_id',
     onDelete: 'CASCADE'
 });
 
@@ -24,15 +29,16 @@ User.hasMany(Reminders, {
     foreignKey: 'user_id',
 });
 
-Events.hasMany(Reminders, {
-    foreignKey: 'event_id',
-    onDelete: "CASCADE"
-});
 Categories.hasMany(Events, {
     foreignKey: 'category_id'
-})
+});
 Events.belongsTo(Categories, {
     foreignKey: 'category_id'
-})
+});
+
+// EVENTS ARE WRONG
+
+
+
 
 module.exports = { User, Events, Reminders, Categories };

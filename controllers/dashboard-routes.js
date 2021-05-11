@@ -4,8 +4,8 @@ const Events = require('../models/Events');
 const Reminders = require('../models/Reminders');
 const Categories = require('../models/Categories');
 
-
 router.get('/', async (req, res) => {
+
     if (!req.session.loggedIn) {
         res.render('login')
         return;
@@ -15,13 +15,12 @@ router.get('/', async (req, res) => {
     const user_id = req.session.user_id;
     const deflt = true
     const month = await CalRender.createCalMonth()
-
-    
+    // GRABS USER EVENTS FOR THE CURRENT MONTH
     let response = await Events.findAll({
         where: {
             user_id: user_id,
-            month: 5,
-            year: 2021
+            month: `${CalRender.currentMonth()}`,
+            year: `${CalRender.currentYear()}`
         },
         include: [
             {

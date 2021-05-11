@@ -51,7 +51,7 @@ async function submitReminderHandler (event){
             return
         }
         return res.json()
-    }).then(json=>{
+    }).then(()=>{
        return window.location.replace('/dashboard');
     }).catch(e=>{
         console.log(e)

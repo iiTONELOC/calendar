@@ -70,8 +70,10 @@ router.post('/', (req, res) => {
                 req.session.username = dbUserData.username;
                 req.session.loggedIn = true;
 
-                res.sendStatus(201);
+                res.status(201).json({user:dbUserData});
+                
             });
+            return
         })
         .catch(err => {
             const eMsg = err.errors[0].message

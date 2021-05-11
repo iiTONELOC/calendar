@@ -20,7 +20,7 @@ async function signUpFormHandler(event) {
 
         // check the response status
         if (response.status === 201) {
-            return window.location.replace('/dashboard');
+            window.location.replace('/dashboard');
         } else if (response.status === 404) {
             emailAlert.textContent = "No User With That Email Exists!"
         } else if (response.status === 400) {

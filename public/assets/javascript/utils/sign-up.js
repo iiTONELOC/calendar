@@ -14,7 +14,7 @@ async function signUpFormHandler(event) {
         if (username.length < 4) {
             return userAlert.textContent = "Usernames must be at least 5 characters!"
         }
-        const response = await fetch('/api/users', {
+        fetch('/api/users', {
             method: 'post',
             body: JSON.stringify({
                 username,
@@ -22,18 +22,27 @@ async function signUpFormHandler(event) {
                 password
             }),
             headers: { 'Content-Type': 'application/json' }
-        });
-
-        // check the response status
-        if (response.status === 201) {
-            return window.location.replace('/dashboard');
-        } else if (response.status === 202) {
-            emailAlert.textContent = "Email Already Exists!"
-        } else if (response.status === 400) {
-            emailAlert.textContent = "Please enter a valid email address!"
-        } else if (response.status === 411) {
-            passwordAlert.textContent = "Passwords must be at least 4 characters!"
-        }
+        }).then(res=>{
+            if (res.status === 201) {
+                return res.json()
+            } else if (res.status === 202) {
+                emailAlert.textContent = "Email Already Exists!"
+            } else if (res.status === 400) {
+                emailAlert.textContent = "Please enter a valid email address!"
+            } else if (res.status === 411) {
+                passwordAlert.textContent = "Passwords must be at least 4 characters!"
+            }
+        }).then(data=>{
+            // this callback may be redundant, response could be handled on line 27 instead. 
+            if(data){
+                window.location.replace('/dashboard');
+            }
+        }).catch(e=>{
+            console.log(e)
+        })
+       
+               // check the response status
+        
     }
 }
 btn.addEventListener('click', signUpFormHandler)

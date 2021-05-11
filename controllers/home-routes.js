@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
 
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
-        res.redirect('/');
+        res.render('/');
         return;
     }
 
@@ -28,7 +28,10 @@ router.get('/login', (req, res) => {
 
 router.get('/sign-up', (req, res) => {
     if (req.session.loggedIn) {
-        res.redirect('/');
+        const loggedIn = req.session.loggedIn
+        res.render('/dashboard',{
+            loggedIn
+        });
         return;
     }
 
@@ -37,7 +40,7 @@ router.get('/sign-up', (req, res) => {
 
 router.get('/create-task', (req, res) => {
     if (!req.session.loggedIn) {
-        res.redirect('/login');
+        res.render('/login');
         return;
     }
     loggedIn = req.session.loggedIn

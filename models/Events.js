@@ -40,11 +40,11 @@ Events.init(
             }
         },
         date: {
-            type: DataTypes.STRING,
+            type: DataTypes.DATEONLY,
             allowNull: false
         },
         time: {
-            type: DataTypes.STRING,
+            type: DataTypes.TIME,
             allowNull: false
         },
         important:{

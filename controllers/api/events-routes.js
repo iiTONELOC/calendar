@@ -29,12 +29,22 @@ router.get('/', (req, res) => {
 });
 // returns events with reminders for current day.
 router.get('/reminders', (req, res) => {
+    console.log(req.session.user_id)
     const currentDate = CalRender.currentDate();
     Events.findAll({
         where: {
-            user_id: req.params.user_id,
+            user_id: req.session.user_id,
             date: currentDate,
-        }
+        },
+        include: [
+            {
+                model: Reminders,
+            },
+            {
+                model: Categories,
+                attributes: ['name']
+            },
+        ]
     })
         .then(dbRemindData => res.json(dbRemindData))
         .catch(err => {

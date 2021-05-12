@@ -29,6 +29,7 @@
     "moment": "^2.29.1",
     "mysql2": "^2.2.5",
     "node-calendar": "^0.1.5",
-    "sequelize": "^6.6.2"
+    "sequelize": "^6.6.2",
+    "twilio": "^3.62.0"
   }
 }

@@ -24,6 +24,7 @@ const helpers = require('./utils/helpers');
 const hbs = exphbs.create({ helpers });
 const app = express();
 const PORT = process.env.PORT || 3001;
+const Text = require('./sms/Textmsg.js');
 if(process.env.PORT){
     app.set('trust proxy',1)
     sess.cookie.secure = true
@@ -46,3 +47,7 @@ sequelize.sync({ force: false }).then(() => {
 }).catch(e=>{
     console.log(e)
 })
+
+// try out notification
+// NOTIFICATIONS WORK, MAKE A FN THAT RUNS AND SCHEDULES NOTIFICATIONS
+// Text.notify()

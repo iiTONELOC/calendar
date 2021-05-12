@@ -26,13 +26,13 @@ ready(() => {
         // for each event, add a . into reserved spot and set the 
         // span's class for correct color
         for (let i = 0; i < events.length; i++) {
-            const p = document.createElement('span')
+            const p = document.createElement('img')
             const currentDay = events[i].day;
             const catName = events[i].category.name;
             const eventSpanEl = document.getElementById(`event-${currentDay}`)
             // CREATE A NEW SPAN TO PLACE . IN
-            p.setAttribute('class',`${catName} `);
-            p.textContent = '.'
+            p.setAttribute('class',`${catName}`);
+            p.setAttribute('src', `/assets/images/${catName}.png`)
             eventSpanEl.appendChild(p);
             // eventSpanEl.appendChild(span);
         }

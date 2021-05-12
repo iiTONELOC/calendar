@@ -154,33 +154,3 @@
 .mini-cal-container, .mini-container-width {
     width: 307px;
 }
-
-.Health {
-    
-    object-fit: scale-down;
-    /* font-size: 21px; */
-}
-
-.Travel {
-    /* font-size: 21px; */
-   
-    object-fit: scale-down;
-}
-
-.Personal {
-    /* font-size: 21px; */
-   
-    object-fit: scale-down;
-}
-
-.Other {
-    /* font-size: 21px; */
-
-    object-fit: scale-down;
-}
-
-/* end mini cal */
-
-.colors {
-    background-color: rgb(202, 41, 73);
-}

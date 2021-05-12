@@ -32,7 +32,7 @@ ready(() => {
             const eventSpanEl = document.getElementById(`event-${currentDay}`)
             // CREATE A NEW SPAN TO PLACE . IN
             p.setAttribute('class',`${catName} mb-4`);
-            p.setAttribute('src', `/assets/images/${catName}.png`)
+            p.setAttribute('src', `/assets/images/${catName.toLowerCase()}.png`)
             eventSpanEl.appendChild(p);
             // eventSpanEl.appendChild(span);
         }

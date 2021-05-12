@@ -115,6 +115,7 @@ router.post('/login', (req, res) => {
 
             res.status(201).json({ user: dbUserData, message: `Welcome back, ${dbUserData.username}!` });
         });
+        return
     });
 });
 

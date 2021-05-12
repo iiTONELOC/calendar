@@ -9,23 +9,37 @@ async function signUpFormHandler(event) {
     const passwordAlert = document.getElementById('passHelp');
 
     if (email && password) {
-        const response = await fetch('/api/users/login', {
+        fetch('/api/users/login', {
             method: 'post',
             body: JSON.stringify({
                 email,
                 password
             }),
             headers: { 'Content-Type': 'application/json' }
-        });
+        }).then(response=>{
+            
+            if (response.ok) {
+                console.log(response)
+                return response.json()
+            } else if (response.status === 404) {
+                emailAlert.textContent = "No User With That Email Exists!"
+                return false
+            } else if (response.status === 400) {
+                passwordAlert.textContent = "Invalid Password"
+                return false
+            }
+        }).then(d=>{
+            console.log(d)
+            if(d){
+                window.location.replace('/dashboard')
+            }else{
+                alert('Server Error!\nPlease try again');
+                window.location.reload()
+            }
+        })
 
         // check the response status
-        if (response.status === 201) {
-            window.location.replace('/dashboard');
-        } else if (response.status === 404) {
-            emailAlert.textContent = "No User With That Email Exists!"
-        } else if (response.status === 400) {
-            passwordAlert.textContent = "Invalid Password"
-        }
+       
     }
 }
 btn.addEventListener('click', signUpFormHandler)

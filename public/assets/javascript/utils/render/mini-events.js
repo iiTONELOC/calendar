@@ -32,7 +32,7 @@ ready(() => {
             const catName = events[i].category.name;
             const eventSpanEl = document.getElementById(`event-${currentDay}`)
             // CREATE A NEW SPAN TO PLACE . IN
-            p.setAttribute('class',`${catName}  me-1`);
+            p.setAttribute('class',`${catName}  text-start align-self-start '`);
             p.textContent = '.'
             eventSpanEl.appendChild(p);
             // eventSpanEl.appendChild(span);

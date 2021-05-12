@@ -1,5 +1,6 @@
 
 
+
 // wait for dom to load
 function ready(callbackFunction) {
     if (document.readyState != 'loading')
@@ -26,14 +27,15 @@ ready(() => {
         // for each event, add a . into reserved spot and set the 
         // span's class for correct color
         for (let i = 0; i < events.length; i++) {
-            const span = document.createElement('span')
+            const p = document.createElement('p')
             const currentDay = events[i].day;
             const catName = events[i].category.name;
             const eventSpanEl = document.getElementById(`event-${currentDay}`)
             // CREATE A NEW SPAN TO PLACE . IN
-            span.setAttribute('class',catName);
-            span.innerHTML = '<h1 style="font-size: 40px;">.</h1>';
-            eventSpanEl.appendChild(span);
+            p.setAttribute('class',catName);
+            p.textContent = '.'
+            eventSpanEl.appendChild(p);
+            // eventSpanEl.appendChild(span);
         }
 
     }).catch(e => {

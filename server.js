@@ -9,8 +9,8 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const sess = {
     secret: process.env.SESSION_SECRET,
     cookie: {
-        maxAge:8640000000,
-        sameSite:"Strict",
+        maxAge: 8640000000,
+        sameSite: "Strict",
         secure: false
     },
     resave: false,
@@ -25,8 +25,10 @@ const hbs = exphbs.create({ helpers });
 const app = express();
 const PORT = process.env.PORT || 3001;
 const Text = require('./sms/Textmsg.js');
-if(process.env.PORT){
-    app.set('trust proxy',1)
+const { Op } = require('sequelize');
+const { User, Reminders, Events } = require("./models");
+if (process.env.PORT) {
+    app.set('trust proxy', 1)
     sess.cookie.secure = true
 }
 app.engine('handlebars', hbs.engine);
@@ -44,10 +46,45 @@ app.use(routes);
 // turn on connection to db and server
 sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => console.log(`Now listening on ${PORT}`));
-}).catch(e=>{
+}).catch(e => {
     console.log(e)
 })
 
 // try out notification
 // NOTIFICATIONS WORK, MAKE A FN THAT RUNS AND SCHEDULES NOTIFICATIONS
 // Text.notify()
+
+
+
+// check all users with phone numbers, grab notification list,
+// check current time against scheduled reminder time,
+//  if it is alert user
+// successful message response, delete notification.
+
+userData = async () => {
+    const response =  User.findAll({
+        where: {
+            phone_number: {
+                [Op.not]: null,
+            }
+        },
+        include: [
+            {
+                model: Reminders,
+                include: {
+                    model: Events,
+                    attributes: ['name']
+                }
+            },
+
+        ]
+    }).then(res=>{
+        return res
+    })
+
+    let data= await response
+    console.log(data)
+
+    
+}
+

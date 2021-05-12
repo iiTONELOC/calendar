@@ -6,10 +6,10 @@ async function signUpFormHandler(event) {
     const email = document.getElementById('email1').value.trim();
     const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password1').value.trim();
+    const phone_number = document.getElementById('telephone').value.trim();
     const emailAlert = document.getElementById('emailHelp');
     const userAlert = document.getElementById('userHelp');
     const passwordAlert = document.getElementById('passHelp');
-    const phone_number = document.getElementById('telephone').value.trim();
     const phone_alert = document.getElementById('phoneHelp');
 
     if (username && email && password) {
@@ -26,7 +26,8 @@ async function signUpFormHandler(event) {
             body: JSON.stringify({
                 username,
                 email,
-                password
+                password,
+                phone_number
             }),
             headers: { 'Content-Type': 'application/json' }
         }).then(res=>{
@@ -47,9 +48,6 @@ async function signUpFormHandler(event) {
         }).catch(e=>{
             console.log(e)
         })
-       
-               // check the response status
-        
     }
 }
 btn.addEventListener('click', signUpFormHandler)

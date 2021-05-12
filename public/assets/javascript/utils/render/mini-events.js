@@ -11,7 +11,7 @@ function ready(callbackFunction) {
     return
 }
 ready(() => {
-    fetch('http://localhost:3001/api/events/reminders', {
+    fetch('https://my-caltasker.herokuapp.com/api/events/reminders', {
         method: 'get',
         headers: { 'Content-Type': 'application/json' }
     }).then(res => {

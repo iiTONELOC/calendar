@@ -38,7 +38,7 @@ async function submitReminderHandler (event){
     const before = moment(eventDateTime).subtract(amountOfTime, timeFrame).toString();
     // console.log(event_id,user_id)
     // create reminder
-    fetch('/api/reminders', {
+    fetch('https://my-caltasker.herokuapp.com/api/reminders', {
         method: 'post',
         body: JSON.stringify({
             event_id,

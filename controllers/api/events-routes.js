@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const cors = require('cors')
 const { Events, User, Reminders, Categories } = require('../../models');
 // const withAuth = require('../../utils/auth');
 const CalRender = require('../../utils/render-calendar');
@@ -29,7 +28,7 @@ router.get('/', (req, res) => {
         });
 });
 // returns events with reminders for current day.
-router.get('/reminders', cors(), (req, res, next) => {
+router.get('/reminders', (req, res) => {
     console.log(req.session.user_id)
     const currentDate = CalRender.currentMonth();
     Events.findAll({
@@ -107,7 +106,7 @@ router.post('/', (req, res) => {
         year: y,
     })
         .then(dbPostData => res.status(201).json(
-            { id: dbPostData.id }
+            {id: dbPostData.id}
         ))
         .catch(err => {
             console.log(err);

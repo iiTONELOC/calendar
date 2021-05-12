@@ -11,7 +11,12 @@ function ready(callbackFunction) {
     return
 }
 ready(() => {
-    fetch('https://my-caltasker.herokuapp.com/api/events/reminders', {
+    const host = window.location.hostname;
+    let url = 'https://my-caltasker.herokuapp.com'
+    if(host == 'localhost'){
+        url = 'http://localhost:3001'
+    }
+    fetch(`${url}/api/events/reminders`, {
         method: 'get',
         headers: { 'Content-Type': 'application/json' }
     }).then(res => {
@@ -32,7 +37,7 @@ ready(() => {
             const catName = events[i].category.name;
             const eventSpanEl = document.getElementById(`event-${currentDay}`)
             // CREATE A NEW SPAN TO PLACE . IN
-            p.setAttribute('class',`${catName}'`);
+            p.setAttribute('class',`${catName}`);
             p.textContent = '.'
             eventSpanEl.appendChild(p);
             // eventSpanEl.appendChild(span);

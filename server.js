@@ -3,7 +3,6 @@ const routes = require('./controllers/');
 const sequelize = require('./config/connection');
 const path = require('path');
 const exphbs = require('express-handlebars');
-const cors = require('cors')
 //IMPORT SESSIONS
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -42,20 +41,6 @@ app.use(session(sess));
 
 // turn on routes
 app.use(routes);
-
-// try cors removal
-const allowedOrigins = ['http://localhost:3001'];
-app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) === -1) {
-            const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-            return callback(new Error(msg), false);
-        }
-        return callback(null, true);
-    }
-
-}));
 
 
 // turn on connection to db and server

@@ -64,14 +64,6 @@ Events.init(
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        reminder_id: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-            references:{
-                model: "reminders",
-                key: 'id'
-            }
-        }
     },
     {
         sequelize,

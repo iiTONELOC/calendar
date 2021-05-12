@@ -15,13 +15,13 @@ Reminders.belongsTo(User, {
     foreignKey: 'user_id',
 });
 
-Reminders.hasMany(Events, {
-    foreignKey: 'reminder_id',
+Events.hasMany(Reminders, {
+    foreignKey: 'event_id',
     onDelete: "CASCADE"
 });
 
-Events.belongsTo(Reminders, {
-    foreignKey: 'reminder_id',
+Reminders.belongsTo(Events, {
+    foreignKey: 'event_id',
     onDelete: 'CASCADE'
 });
 

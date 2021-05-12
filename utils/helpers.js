@@ -1,5 +1,5 @@
 const moment = require('moment');
-const renderReminders = require('./mini-reminders');
+const renderEventIcons = require('./mini-events');
 module.exports = {
     // format_date: date => {
     //     return `${new Date(date).getMonth() + 1}/${new Date(date).getDate()}/${new Date(
@@ -23,7 +23,7 @@ module.exports = {
                 el = "";
             }
             // MAKE A FUNCTION THAT CHECKS FOR REMINDERS AND ADD IN SPAN
-            return (`<div id="mini-col-${el}" class="col half-coll text-center p-2"><p id=mini-date-${el}>${el}<br><span id='reminder-${el}'>${renderReminders()}</span></p></div>`)
+            return (`<div id="mini-col-${el}" class="col half-coll text-center p-2"><div class='d-flex column-wrap justify-content-start align-items-center'><p id=mini-date-${el}>${el}</p><br><span class='my-2 d-flex flex-wrap justify-content-center text-center'><span ${renderEventIcons(el)}</span></span></div> </div>`)
         }).join(" ")
         return dates
     },

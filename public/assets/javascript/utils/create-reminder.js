@@ -38,6 +38,7 @@ async function submitReminderHandler (event){
     const before = moment(eventDateTime).subtract(amountOfTime, timeFrame).toString();
     // console.log(event_id,user_id)
     // create reminder
+    const host = window.location.hostname;
     let url = 'https://my-caltasker.herokuapp.com'
     if(host == 'localhost'){
         url = 'http://localhost:3001'

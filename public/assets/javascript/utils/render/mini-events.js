@@ -32,7 +32,7 @@ ready(() => {
             const eventSpanEl = document.getElementById(`event-${currentDay}`)
             // CREATE A NEW SPAN TO PLACE . IN
             span.setAttribute('class',catName);
-            span.textContent = '.';
+            span.innerHTML = '<h1 style="font-size: 40px;">.</h1>';
             eventSpanEl.appendChild(span);
         }
 

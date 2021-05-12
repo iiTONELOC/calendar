@@ -134,8 +134,8 @@
 }
 /* mini cal */
 .mini-current-date{
-    background-color: coral;
-    border-radius: 50%;
+    background-color: rgb(72, 218, 255);
+    border-radius: 30%;
     color: black;
     
 }
@@ -145,7 +145,12 @@
 .mini-cal-container, .mini-container-width{
     width: 307px;
 }
-.current-event{
-    background-color: red;
+.event-1{
+    color:red;
+    font-size: 21px;
+    margin-right: 20px;
+}
+.mini-date-{
+    max-height: 19px;
 }
 /* end mini cal */

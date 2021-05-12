@@ -31,7 +31,7 @@ ready(() => {
             const catName = events[i].category.name;
             const eventSpanEl = document.getElementById(`event-${currentDay}`)
             // CREATE A NEW SPAN TO PLACE . IN
-            p.setAttribute('class',`${catName}`);
+            p.setAttribute('class',`${catName} mb-4`);
             p.setAttribute('src', `/assets/images/${catName}.png`)
             eventSpanEl.appendChild(p);
             // eventSpanEl.appendChild(span);

@@ -23,7 +23,7 @@ module.exports = {
                 el = "";
             }
             // MAKE A FUNCTION THAT CHECKS FOR REMINDERS AND ADD IN SPAN
-            return (`<div id="mini-col-${el}"  class="col half-coll text-center d-flex flex-wrap justify-content-start align-items-start p-2" ><div  class='d-flex  justify-content-center align-items-center '><p  id=mini-date-${el} class='d-flex align-self-center'>${el}</p></div><div><span id='event-${el}' class='mb-4'><!--INSERT EVENT ICONS HERE --></span></div></div>`)
+            return (`<div id="mini-col-${el}"  class="col half-coll text-center d-flex flex-wrap justify-content-center p-2" ><div style='height: 27px'><p  id=mini-date-${el} class='d-flex align-self-center'>${el}</p></div><div class=' col-12 d-flex justify-content-start align-items-center text-center'><div class="col-10 d-flex flex-wrap text-center"'><span id='event-${el}' class='mb-4' style="max-height: 10px;"><!--INSERT EVENT ICONS HERE --></span></div></div></div>`)
         }).join(" ")
         return dates
     },

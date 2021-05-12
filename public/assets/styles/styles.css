@@ -146,7 +146,9 @@
 }
 
 .half-coll {
-    max-width: 40px;
+    max-width: 42px;
+    /* max-height: 40px; */
+    overflow-wrap: normal;
 }
 
 .mini-cal-container, .mini-container-width {

@@ -21,8 +21,6 @@ async function createTaskFormHandler(event) {
     const time = document.querySelector('#time').value;
     const important = document.querySelector('#important').checked;
     const category_id = document.querySelector('#category').value;
-    
-    console.log(category_id)
 
     if (name && description && date && time && category_id) {
         fetch('/api/events/', {

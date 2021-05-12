@@ -23,7 +23,7 @@ const renderEventIcons = (el) => {
     //         document.getElementById(`mini-date-${element}`).setAttribute('class', 'current-event')
     //     }
     // }
-    return `id='event-${event_id}' class='col-auto event-${event_cat} text-start'>...`;
+    return `id='event-${event_id}' class='event-${event_cat} text-start mt-1'>...`;
 };
 
 module.exports = renderEventIcons;

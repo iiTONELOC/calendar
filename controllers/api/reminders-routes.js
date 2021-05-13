@@ -1,5 +1,7 @@
 const router = require('express').Router();
-const { Reminders } = require('../../models');
+const { Reminders, User, Events } = require('../../models');
+const { Op } = require('sequelize');
+
 // const withAuth = require('../../utils/auth');
 
 router.get('/', (req, res) => {
@@ -11,14 +13,45 @@ router.get('/', (req, res) => {
         });
 });
 
-
+router.get('/scheduled', (req, res) => {
+    User.findAll({
+        attributes: { exclude: ['password'] },
+        where: {
+            phone_number: {
+                [Op.not]: null,
+            }
+        },
+        include: [
+            {
+                model: Reminders,
+                include: {
+                    model: Events,
+                }
+            },
+        ]
+    }).then(dbRemindData => {
+        if (!dbRemindData) {
+            res.status(404).json({ message: 'No reminders found !' });
+            return;
+        }
+        res.json({ data: dbRemindData }).end()
+    })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
 
 router.get('/:id', (req, res) => {
+    if (req.params.id === 'scheduled') {
+        console.log('WHY')
+        return
+    }
     Reminders.findOne({
         where: {
             id: req.params.id
         },
-        
+
     })
         .then(dbRemindData => {
             if (!dbRemindData) {
@@ -33,7 +66,10 @@ router.get('/:id', (req, res) => {
         });
 });
 
-router.post('/',  (req, res) => {
+// reminder route for scheduled events
+
+
+router.post('/', (req, res) => {
     console.log(req.body)
     Reminders.create({
         user_id: req.session.user_id,
@@ -47,7 +83,7 @@ router.post('/',  (req, res) => {
         });
 });
 
-router.delete('/:id',  (req, res) => {
+router.delete('/:id', (req, res) => {
     Reminders.destroy({
         where: {
             id: req.params.id
@@ -66,8 +102,8 @@ router.delete('/:id',  (req, res) => {
         });
 });
 
-router.put('/:id',  (req, res) => {
-    Reminders.update(req.body,{
+router.put('/:id', (req, res) => {
+    Reminders.update(req.body, {
         where: {
             id: req.params.id
         }

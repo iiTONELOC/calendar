@@ -25,8 +25,7 @@ const hbs = exphbs.create({ helpers });
 const app = express();
 const PORT = process.env.PORT || 3001;
 const Text = require('./sms/Textmsg.js');
-const { Op } = require('sequelize');
-const { User, Reminders, Events } = require("./models");
+const Remind = require("./utils/workers/schedule-notifications")
 if (process.env.PORT) {
     app.set('trust proxy', 1)
     sess.cookie.secure = true
@@ -45,10 +44,19 @@ app.use(routes);
 
 // turn on connection to db and server
 sequelize.sync({ force: false }).then(() => {
-    app.listen(PORT, () => console.log(`Now listening on ${PORT}`));
-}).catch(e => {
-    console.log(e)
+    app.listen(PORT, () => console.log(`Now listening on ${PORT}`))
 })
+    .then(async () => {
+        // let d = await Text.getReminders();
+        // console.log(d)
+        // pass in two variables
+        // 1st one if you want to chain getting reminders and filtering reminders
+        // 2nd variable if you want to then run the scheduler function
+        Text.getReminders(true,true)
+
+    }).catch(e => {
+        console.log(e)
+    })
 
 // try out notification
 // NOTIFICATIONS WORK, MAKE A FN THAT RUNS AND SCHEDULES NOTIFICATIONS
@@ -60,31 +68,4 @@ sequelize.sync({ force: false }).then(() => {
 // check current time against scheduled reminder time,
 //  if it is alert user
 // successful message response, delete notification.
-
-userData = async () => {
-    const response = User.findAll({
-        where: {
-            phone_number: {
-                [Op.not]: null,
-            }
-        },
-        include: [
-            {
-                model: Reminders,
-                include: {
-                    model: Events,
-                    attributes: ['name']
-                }
-            },
-
-        ]
-    }).then(res => {
-        return res
-    })
-
-    let data = await response
-    console.log(data)
-
-
-}
-
+// findReminders();

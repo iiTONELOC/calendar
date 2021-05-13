@@ -41,6 +41,7 @@ class CalRender {
     static currentDate(){
         return moment(new Date()).format("YYYY-MM-DD")
     }
+    
 }
 
 

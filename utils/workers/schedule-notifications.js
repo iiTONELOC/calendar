@@ -117,7 +117,7 @@ class Remind {
         
 
             if (events.length) {
-                console.log("working")
+                console.log("++++++++++++++++\nREMINDERS TO SEND OFF", events)
 
                 // mutate array, when empty it will stop
                 // setInterval(function () {
@@ -156,7 +156,7 @@ class Remind {
             }
 
             if(expired.length){
-                console.log("EXPIRED EVENT LIST",expired)
+                console.log("++++++++++++++++\nEXPIRED!, SEND FOR DELETION",expired)
             }
         }
         // check the arrays next

@@ -94,8 +94,13 @@ class Remind {
         const userArray = obj.user
         let events = [];
         let expired = [];
-        if (reminderArr.length) {
-            setInterval(function () {
+        let notifying = [];
+
+        // THIS WORKS NEED TO MOVE THE TIMER TO THE SERVER FILE SO IT IS ALWAYS FRESH DATA
+        setInterval(function () {
+            console.log("expired events", expired)
+            console.log("Upcoming events!", events)
+            if (reminderArr.length) {
                 reminderArr.forEach(el => {
                     const reminderTime = ((new Date(el.before).getTime()));
                     const dif = (reminderTime - currentTime) / 60000
@@ -103,29 +108,40 @@ class Remind {
                     if (dif < 0) {
                         // console.log("Expired Events")
                         expired.push(el)
-                        console.log("expired events", expired)
+
 
                     } if (dif >= 0 && dif <= 5) {
                         events.push(el)
 
-                        console.log("Upcoming events!", events)
+
                     }
                 });
-            }, 60000)
-        }
-
-
-
-        // const pastEvents = reminderArr.filter(el => el.reminders.before >= 0);
-        // console.log(currentTime, "current");
-        // console.log(reminderTime, 'reminder');
-
-
-        // console.log('diff',dif)
-
-        console.log(new Date().getTime())
+            }
+            // console.log("timer is running")
+            // console.log("events", events)
+            // if (events.length) {
+            //     for (let i = 0; i < events.length; i++) {
+            //         const el = events[i];
+            //         notifying.push(el);
+            //     }
+            //     console.log(notifying, "Notifications to be sent")
+            // }
+        }, 60000)
     }
 }
+
+
+
+// const pastEvents = reminderArr.filter(el => el.reminders.before >= 0);
+// console.log(currentTime, "current");
+// console.log(reminderTime, 'reminder');
+
+
+// console.log('diff',dif)
+
+//         console.log(new Date().getTime())
+//     }
+// }
 
 
 

@@ -3,6 +3,7 @@ const { Categories } = require('../../models');
 // const withAuth = require('../../utils/auth');
 
 router.get('/', (req, res) => {
+    console.log(`++++++++++++++++++++`)
     Categories.findAll()
         .then(dbCatData => res.json(dbCatData))
         .catch(err => {
@@ -12,6 +13,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+    console.log(`++++++++++++++++++++`)
     Categories.findOne({
         where: {
             id: req.params.id
@@ -32,7 +34,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/',  (req, res) => {
-    
+    console.log(`++++++++++++++++++++`)
     Categories.create({
     name: req.body.name
     })
@@ -44,6 +46,7 @@ router.post('/',  (req, res) => {
 });
 
 router.delete('/:id',  (req, res) => {
+    console.log(`++++++++++++++++++++`)
     Categories.destroy({
         where: {
             id: req.params.id
@@ -63,6 +66,7 @@ router.delete('/:id',  (req, res) => {
 });
 
 router.put('/:id',  (req, res) => {
+    console.log(`++++++++++++++++++++`)
     Categories.update(req.body,{
         where: {
             id: req.params.id

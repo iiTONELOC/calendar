@@ -5,6 +5,7 @@ const { Op } = require('sequelize');
 // const withAuth = require('../../utils/auth');
 
 router.get('/', (req, res) => {
+    console.log(`++++++++++++++++++++`)
     Reminders.findAll()
         .then(dbRemindData => res.json(dbRemindData))
         .catch(err => {
@@ -14,6 +15,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/scheduled', (req, res) => {
+    console.log(`++++++++++++++++++++`)
     User.findAll({
         attributes: { exclude: ['password'] },
         where: {
@@ -34,6 +36,7 @@ router.get('/scheduled', (req, res) => {
             res.status(404).json({ message: 'No reminders found !' });
             return;
         }
+       
         res.json({ data: dbRemindData }).end()
     })
         .catch(err => {
@@ -43,6 +46,7 @@ router.get('/scheduled', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+    console.log(`++++++++++++++++++++`)
     if (req.params.id === 'scheduled') {
         console.log('WHY')
         return

@@ -1,5 +1,4 @@
 
-const e = require('express');
 const fetch = require('node-fetch');
 const CalRender = require('../../utils/render-calendar');
 const m = CalRender.currentMonth();
@@ -48,7 +47,7 @@ class Remind extends Text {
 
                 } else {
                     return {
-                        currentReminders: response.data[0].reminders,
+                        currentReminders: response.data,
                         user: response.data
                     };
                 }
@@ -72,20 +71,38 @@ class Remind extends Text {
     // if you want to then run the scheduler function
     */
     static async filterReminders(obj, runScheduler) {
+
         if (!obj) {
             return
         }
-        let currentReminders;
-        if (!obj[0]) {
-            currentReminders = obj.currentReminders.filter(el => el.event.month == m && el.event.year == y);
-        } else {
-            currentReminders = obj.filter(el => el.event.month == m && el.event.year == y);
-        }
+
+        const user = obj.user.filter(el => {
+            const r = el.reminders.length
+            if (r === undefined || r === 'undefined' || r === 0) {
+                return el = ''
+            } else {
+                return el
+            }
+        })
+        const currentReminders = obj.currentReminders.filter(el => {
+            const d = el.reminders.length;
+            if (d === undefined || d === 'undefined' || d === 0) {
+
+                console.log(`${el.username} has no active reminders!`)
+                return el = ''
+            } else {
+                return el
+            }
+
+        });
+
+
         if (runScheduler) {
             const data = {
                 reminders: currentReminders,
-                user: obj.user
+                user: user
             }
+
             Remind.runScheduler(data)
         }
     }
@@ -96,36 +113,50 @@ class Remind extends Text {
     // 5Ms prior it will fire a function to send the message, after 4m15s elapses
     */
     static async runScheduler(obj) {
-        const currentTime = new Date(Date.now()).getTime();
+
+
         const reminderArr = obj.reminders;
         const userArray = obj.user
         let notifyArr = [];
         let expiredArr = [];
+        let holder =[];
 
         // check for reminders
         if (reminderArr.length) {
             // NEED TO MUTATE DATA LIST NEVER ENDS
             console.log('EVENTS w/REMINDERS FOUND!')
             // push elements to appropriate arrays
-            reminderArr.map(el => {
-                let i = 0;
-                const reminderTime = ((new Date(el.before).getTime()));
-                const dif = (reminderTime - currentTime) / 60000
+            const reminders = reminderArr.map(el => {
+                return el.reminders
+            });
+            // console.log("all rems",reminders)
+            reminders.forEach(el => {
+                for (let i = 0; i < el.length; i++) {
+                    const element = el[i];
+                    holder.push(element);
+                }
+            });
 
-                if (dif < 0) {
+            holder.forEach(en => {
+                const currentTime = new Date(Date.now()).getTime();
+                const reminderTime = ((new Date(en.before).getTime()));
+                const dif = (reminderTime - currentTime) / 60000
+                // console.log(dif)
+                // console.log(currentTime)
+                // console.log(reminderTime)
+                if (dif < -.5) {
                     // send to expiredArr
-                    return expiredArr.push(el)
-                } if (dif >= 0 && dif<1) {
+                    return expiredArr.push(en)
+                } if (dif >=-.5 && dif <= 1) {
                     // send to notify
-                    const data ={
-                        id: el.id,
-                        user_id: el.user_id,
-                        event: el.event,
+                    const data = {
+                        id: en.id,
+                        user_id: en.user_id,
+                        event: en.event,
                         remaining: dif
                     }
                     notifyArr.push(data)
                 }
-                i++;
             });
 
             // if notifications filter users to get ph
@@ -139,17 +170,19 @@ class Remind extends Text {
                     user: userArray,
                     reminders: notifyArr,
                 };
-                // console.log(data)
+            
 
                 // notifyArr.forEach(el=>{
 
                 // })
                 return Text.notify(data);
+            } else {
+                console.log("No Reminders need to be sent!")
             }
 
             // if expired send to be deleted
             if (expiredArr.length) {
-                // console.log("++++++++++++++++\nEXPIRED!, SEND FOR DELETION"/*, expiredArr*/)
+                console.log("++++++++++++++++\nEXPIRED!, SEND FOR DELETION",/*, expiredArr*/)
 
             }
         } else {

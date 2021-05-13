@@ -6,6 +6,7 @@ const { User, Events, Reminders, Categories } = require('../../models');
 
 // get all users
 router.get('/', (req, res) => {
+    console.log(`++++++++++++++++++++`)
     if (!req.session.loggedIn) {
         res.render('login')
         return;
@@ -21,6 +22,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+    console.log(`++++++++++++++++++++`)
     User.findOne({
         attributes: { exclude: ['password'] },
         where: {
@@ -59,6 +61,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res,) => {
+    console.log(`++++++++++++++++++++`)
     // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
     User.create({
         username: req.body.username,
@@ -91,6 +94,7 @@ router.post('/', (req, res,) => {
 });
 
 router.post('/login', (req, res) => {
+    console.log(`++++++++++++++++++++`)
     // expects {email: 'lernantino@gmail.com', password: 'password1234'}
     User.findOne({
         where: {
@@ -121,6 +125,7 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/logout', (req, res) => {
+    console.log(`++++++++++++++++++++`)
     if (req.session.loggedIn) {
         req.session.destroy(() => {
             res.status(204).end();
@@ -132,6 +137,7 @@ router.post('/logout', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
+    console.log(`++++++++++++++++++++`)
     // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
 
     // pass in req.body instead to only update what's passed through
@@ -155,6 +161,7 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
+    console.log(`++++++++++++++++++++`)
     User.destroy({
         where: {
             id: req.params.id

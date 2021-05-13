@@ -29,7 +29,7 @@ router.get('/', (req, res) => {
 });
 // returns events with reminders for current day.
 router.get('/reminders', (req, res) => {
-    console.log(req.session.user_id)
+    console.log(`++++++++++++++++++++`)
     const currentDate = CalRender.currentMonth();
     Events.findAll({
         where: {
@@ -54,6 +54,7 @@ router.get('/reminders', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+    console.log(`++++++++++++++++++++`)
     Events.findOne({
         where: {
             id: req.params.id
@@ -87,12 +88,12 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+    console.log(`++++++++++++++++++++`)
     let d = req.body.date;
     m = d.split('-')[0];
     da = d.split('-')[1];
     y = d.split('-')[2];
 
-    console.log(m, da, y)
     Events.create({
         name: req.body.name,
         description: req.body.description,
@@ -115,6 +116,7 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
+    console.log(`++++++++++++++++++++`)
     Events.update(
         req.body,
         {
@@ -137,6 +139,7 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
+    console.log(`++++++++++++++++++++`)
     Events.destroy({
         where: {
             id: req.params.id

@@ -25,11 +25,12 @@ const hbs = exphbs.create({ helpers });
 const app = express();
 const PORT = process.env.PORT || 3001;
 // const Text = require('./sms/Textmsg.js');
-const Remind = require("./utils/workers/schedule-notifications")
+const Remind = require("./utils/workers/schedule-notifications");
 if (process.env.PORT) {
     app.set('trust proxy', 1)
     sess.cookie.secure = true
 }
+
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
@@ -43,34 +44,28 @@ app.use(routes);
 
 
 // turn on connection to db and server
-sequelize.sync({ force: false }).then(() => {
-    app.listen(PORT, () => console.log(`Now listening on ${PORT}`))
-})
-    .then(async () => {
-        // let d = await Text.getReminders();
-        // console.log(d)
-        // pass in two variables
-        // 1st one if you want to chain getting reminders and filtering reminders
-        // 2nd variable if you want to then run the scheduler function
-       
+sequelize
+    .sync({ force: false })
+    .then(() => {
+        app.listen(PORT, () => console.log(`Now listening on ${PORT}`))
+    })
+    .then(() => {
+
         setInterval(function () {
+            console.log(`____________________`)
             console.log("fetching reminders")
-            Remind.getReminders(true,true)
-                // }
-            }, 15000)
+
+            /*
+            // pass in two variables
+            // 1st one if you want to chain getting reminders and filtering reminders
+            // 2nd variable if you want to then run the scheduler function
+             */
+
+            Remind.getReminders(true, true)
+
+
+        }, 15000)
 
     }).catch(e => {
         console.log(e)
     })
-
-// try out notification
-// NOTIFICATIONS WORK, MAKE A FN THAT RUNS AND SCHEDULES NOTIFICATIONS
-// Text.notify()
-
-
-
-// check all users with phone numbers, grab notification list,
-// check current time against scheduled reminder time,
-//  if it is alert user
-// successful message response, delete notification.
-// findReminders();

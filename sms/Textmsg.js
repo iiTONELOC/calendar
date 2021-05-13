@@ -14,7 +14,7 @@ class Text {
         // console.log(events)
         // loop through events, if reminder time = now, send off 
         const reminders = events.reminders
-        console.log(reminders)
+        // console.log("HERE ",reminders)
         reminders.forEach(el => {
             if (el.remaining <= 0) {
                 console.log("Notifying these events now", el)

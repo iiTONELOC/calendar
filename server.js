@@ -24,7 +24,7 @@ const helpers = require('./utils/helpers');
 const hbs = exphbs.create({ helpers });
 const app = express();
 const PORT = process.env.PORT || 3001;
-const Text = require('./sms/Textmsg.js');
+// const Text = require('./sms/Textmsg.js');
 const Remind = require("./utils/workers/schedule-notifications")
 if (process.env.PORT) {
     app.set('trust proxy', 1)
@@ -55,9 +55,9 @@ sequelize.sync({ force: false }).then(() => {
        
         setInterval(function () {
             console.log("fetching reminders")
-            Text.getReminders(true,true)
+            Remind.getReminders(true,true)
                 // }
-            }, 60000)
+            }, 15000)
 
     }).catch(e => {
         console.log(e)

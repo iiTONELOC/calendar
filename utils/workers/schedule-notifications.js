@@ -18,7 +18,7 @@ const Text = require('../../sms/Textmsg')
 // successful message response, delete notification.
 */
 
-class Remind {
+class Remind extends Text {
 
     /*
     // pass in two variables
@@ -43,8 +43,8 @@ class Remind {
             })
             .then(response => {
                 if (response.data[0] == "undefined" || response.data[0] == undefined) {
-                   return(filter = false, rS = false);
-                   
+                    return (filter = false, rS = false);
+
 
                 } else {
                     return {
@@ -63,7 +63,6 @@ class Remind {
         } else if (filter && !rS) {
             Remind.filterReminders(d);
         } else {
-            console.log("working as expected")
             return d
         }
     }
@@ -97,71 +96,68 @@ class Remind {
     // 5Ms prior it will fire a function to send the message, after 4m15s elapses
     */
     static async runScheduler(obj) {
-        // current time needs to be in the loop 
         const currentTime = new Date(Date.now()).getTime();
         const reminderArr = obj.reminders;
         const userArray = obj.user
         let notifyArr = [];
         let expiredArr = [];
+
+        // check for reminders
         if (reminderArr.length) {
             // NEED TO MUTATE DATA LIST NEVER ENDS
             console.log('EVENTS w/REMINDERS FOUND!')
             // push elements to appropriate arrays
-            reminderArr.forEach(el => {
+            reminderArr.map(el => {
+                let i = 0;
                 const reminderTime = ((new Date(el.before).getTime()));
-                if (process.env.DEV) {
-                    // reminderTime -= 14400000
-                    console.log("local env")
-                }
-                console.log(reminderTime, "reminder time")
                 const dif = (reminderTime - currentTime) / 60000
-                // console.log(dif)
-                // send to expiredArr
+
                 if (dif < 0) {
-                    // console.log("expiredArr notifyArr")
+                    // send to expiredArr
                     return expiredArr.push(el)
-                } if (dif >= -1 && dif <= 5) {
-                    // send to 
-                    return notifyArr.push(el)
+                } if (dif >= 0 && dif<1) {
+                    // send to notify
+                    const data ={
+                        id: el.id,
+                        user_id: el.user_id,
+                        event: el.event,
+                        remaining: dif
+                    }
+                    notifyArr.push(data)
                 }
+                i++;
             });
 
             // if notifications filter users to get ph
             if (notifyArr.length) {
                 // console.log("++++++++++++++++\nREMINDERS TO SEND OFF", notifyArr)
-                console.log('USER ARRAY', userArray);
-                console.log("+++++++++++\n");
-                console.log("NOTIFICATIONS", notifyArr);
+                // console.log('USER ARRAY', userArray);
+                // console.log("+++++++++++\n");
+                // console.log("NOTIFICATIONS", notifyArr);
+
+                const data = {
+                    user: userArray,
+                    reminders: notifyArr,
+                };
+                // console.log(data)
+
+                // notifyArr.forEach(el=>{
+
+                // })
+                return Text.notify(data);
             }
 
             // if expired send to be deleted
             if (expiredArr.length) {
-                console.log("++++++++++++++++\nEXPIRED!, SEND FOR DELETION", expiredArr)
+                // console.log("++++++++++++++++\nEXPIRED!, SEND FOR DELETION"/*, expiredArr*/)
+
             }
+        } else {
+            return
         }
-        // check the arrays next
-
-        // THIS WORKS NEED TO MOVE THE TIMER TO THE SERVER FILE SO IT IS ALWAYS FRESH DATA
-
     }
+
+
 }
-
-
-
-// const pastEvents = reminderArr.filter(el => el.reminders.before >= 0);
-// console.log(currentTime, "current");
-// console.log(reminderTime, 'reminder');
-
-
-// console.log('diff',dif)
-
-//         console.log(new Date().getTime())
-//     }
-// }
-
-
-
-
-
 
 module.exports = Remind;

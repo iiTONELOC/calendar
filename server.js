@@ -43,7 +43,7 @@ app.use(routes);
 
 
 // turn on connection to db and server
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: false}).then(() => {
     app.listen(PORT, () => console.log(`Now listening on ${PORT}`))
 })
     .then(async () => {
@@ -52,7 +52,12 @@ sequelize.sync({ force: false }).then(() => {
         // pass in two variables
         // 1st one if you want to chain getting reminders and filtering reminders
         // 2nd variable if you want to then run the scheduler function
-        Text.getReminders(true,true)
+       
+        setInterval(function () {
+            console.log("fetching reminders")
+            Text.getReminders(true,true)
+                // }
+            }, 60000)
 
     }).catch(e => {
         console.log(e)

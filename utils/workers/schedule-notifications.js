@@ -89,44 +89,80 @@ class Remind {
     // 5Ms prior it will fire a function to send the message, after 4m15s elapses
     */
     static async runScheduler(obj) {
+        // current time needs to be in the loop 
         const currentTime = new Date(Date.now()).getTime();
         const reminderArr = obj.reminders;
         const userArray = obj.user
         let events = [];
         let expired = [];
         let notifying = [];
-
-        // THIS WORKS NEED TO MOVE THE TIMER TO THE SERVER FILE SO IT IS ALWAYS FRESH DATA
-        setInterval(function () {
-            console.log("expired events", expired)
-            console.log("Upcoming events!", events)
-            if (reminderArr.length) {
-                reminderArr.forEach(el => {
-                    const reminderTime = ((new Date(el.before).getTime()));
-                    const dif = (reminderTime - currentTime) / 60000
-                    console.log(dif)
-                    if (dif < 0) {
-                        // console.log("Expired Events")
-                        expired.push(el)
+        if (reminderArr.length) {
+            // NEED TO MUTATE DATA LIST NEVER ENDS
+            console.log('EVENTS FOUND!')
+            reminderArr.forEach(el => {
+                const reminderTime = ((new Date(el.before).getTime()));
+                const dif = (reminderTime - currentTime) / 60000
+                // console.log(dif)
+                if (dif < 0) {
+                    // console.log("Expired Events")
+                   return expired.push(el)
 
 
-                    } if (dif >= 0 && dif <= 5) {
-                        events.push(el)
+                } if (dif >= 0 && dif <= 5) {
+                   return events.push(el)
 
 
-                    }
-                });
+                }
+            });
+        
+
+            if (events.length) {
+                console.log("working")
+
+                // mutate array, when empty it will stop
+                // setInterval(function () {
+    
+                //     console.log("expired events", expired)
+                //     console.log("Upcoming events!", events)
+                //     console.log('USER INFO', userArray)
+                //     // if (reminderArr.length) {
+                //     //     // NEED TO MUTATE DATA LIST NEVER ENDS
+                //     //     reminderArr.forEach(el => {
+                //     //         const reminderTime = ((new Date(el.before).getTime()));
+                //     //         const dif = (reminderTime - currentTime) / 60000
+                //     //         console.log(dif)
+                //     //         if (dif < 0) {
+                //     //             // console.log("Expired Events")
+                //     //             expired.push(el)
+    
+    
+                //     //         } if (dif >= 0 && dif <= 5) {
+                //     //             events.push(el)
+    
+    
+                //     //         }
+                //     //     });
+                //     // }
+                //     // console.log("timer is running")
+                //     // console.log("events", events)
+                //     // if (events.length) {
+                //     //     for (let i = 0; i < events.length; i++) {
+                //     //         const el = events[i];
+                //     //         notifying.push(el);
+                //     //     }
+                //     //     console.log(notifying, "Notifications to be sent")
+                //     // }
+                // }, 60000)
             }
-            // console.log("timer is running")
-            // console.log("events", events)
-            // if (events.length) {
-            //     for (let i = 0; i < events.length; i++) {
-            //         const el = events[i];
-            //         notifying.push(el);
-            //     }
-            //     console.log(notifying, "Notifications to be sent")
-            // }
-        }, 60000)
+
+            if(expired.length){
+                console.log("EXPIRED EVENT LIST",expired)
+            }
+        }
+        // check the arrays next
+       
+        // THIS WORKS NEED TO MOVE THE TIMER TO THE SERVER FILE SO IT IS ALWAYS FRESH DATA
+
     }
 }
 

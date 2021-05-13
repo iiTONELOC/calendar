@@ -44,6 +44,12 @@ class CalRender {
     
 }
 
+// x -3 = ?
 
+function subtractThree(num){
+    return num - 3;
+}
+
+subtractThree(6);
 
 module.exports = CalRender

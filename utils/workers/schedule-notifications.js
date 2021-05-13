@@ -42,11 +42,17 @@ class Remind {
                 }
             })
             .then(response => {
+                if (response.data[0] == "undefined" || response.data[0] == undefined) {
+                   return(filter = false, rS = false);
+                   
 
-                return {
-                    currentReminders: response.data[0].reminders,
-                    user: response.data
-                };
+                } else {
+                    return {
+                        currentReminders: response.data[0].reminders,
+                        user: response.data
+                    };
+                }
+
             })
             .catch(e => {
                 console.log(e)
@@ -57,6 +63,7 @@ class Remind {
         } else if (filter && !rS) {
             Remind.filterReminders(d);
         } else {
+            console.log("working as expected")
             return d
         }
     }
@@ -113,7 +120,7 @@ class Remind {
                 if (dif < 0) {
                     // console.log("expiredArr notifyArr")
                     return expiredArr.push(el)
-                } if (dif >= 0 && dif <= 5) {
+                } if (dif >= -1 && dif <= 5) {
                     // send to 
                     return notifyArr.push(el)
                 }
@@ -124,7 +131,7 @@ class Remind {
                 // console.log("++++++++++++++++\nREMINDERS TO SEND OFF", notifyArr)
                 console.log('USER ARRAY', userArray);
                 console.log("+++++++++++\n");
-                console.log(notifyArr, "NOTIFICATIONS");
+                console.log("NOTIFICATIONS", notifyArr);
             }
 
             // if expired send to be deleted

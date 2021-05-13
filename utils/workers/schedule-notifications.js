@@ -103,7 +103,7 @@ class Remind {
                 let reminderTime = ((new Date(el.before).getTime()));
                 if (!process.env.DEV) {
                     console.log("SERVER ENVIRONMENT")
-                    reminderTime -= 14400000
+                    // reminderTime -= 14400000
                 }else{
                     console.log("LOCAL ENVIRONMENT")
                 }

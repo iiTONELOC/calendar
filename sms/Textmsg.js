@@ -9,18 +9,18 @@ class Text extends Remind{
     // configure this to take in params
     // user_phone, event_title, event_start_time
 
-    static async notify() {
-        const messages = await
-            client.messages
-                .create({
-                    body: "LOOK MA!! NO HANDS!",
-                    from: `${num}`,
-                    to: '+13528041676'
-                })
-                .then(message => console.log(message)).catch(e => console.log(e))
-                .done()
+    static async notify(events) {
+        // const messages = await
+        //     client.messages
+        //         .create({
+        //             body: "LOOK MA!! NO HANDS!",
+        //             from: `${num}`,
+        //             to: '+13528041676'
+        //         })
+        //         .then(message => console.log(message)).catch(e => console.log(e))
+        //         .done()
                 
-        return messages
+        // return messages
     }
 }
 

@@ -9,6 +9,7 @@ const moment = require('moment');
 const tm = moment;
 require('dotenv').config();
 let url = 'https://my-caltasker.herokuapp.com/';
+const Text = require('../../sms/Textmsg')
 
 /*
 // check all users with phone numbers, grab notification list,
@@ -70,9 +71,9 @@ class Remind {
         }
         let currentReminders;
         if (!obj[0]) {
-            currentReminders = obj.currentReminders.filter(el => el.event.day == d && el.event.month == m && el.event.year == y);
+            currentReminders = obj.currentReminders.filter(el => el.event.month == m && el.event.year == y);
         } else {
-            currentReminders = obj.filter(el => el.event.day == d && el.event.month == m && el.event.year == y);
+            currentReminders = obj.filter(el => el.event.month == m && el.event.year == y);
         }
         if (runScheduler) {
             const data = {
@@ -93,77 +94,42 @@ class Remind {
         const currentTime = new Date(Date.now()).getTime();
         const reminderArr = obj.reminders;
         const userArray = obj.user
-        let events = [];
-        let expired = [];
-        let notifying = [];
+        let notifyArr = [];
+        let expiredArr = [];
         if (reminderArr.length) {
             // NEED TO MUTATE DATA LIST NEVER ENDS
-            console.log('EVENTS FOUND!')
+            console.log('EVENTS w/REMINDERS FOUND!')
+            // push elements to appropriate arrays
             reminderArr.forEach(el => {
-                let reminderTime = ((new Date(el.before).getTime()));
-                if (!process.env.DEV) {
-                    console.log("SERVER ENVIRONMENT")
+                const reminderTime = ((new Date(el.before).getTime()));
+                if (process.env.DEV) {
                     // reminderTime -= 14400000
-                }else{
-                    console.log("LOCAL ENVIRONMENT")
+                    console.log("local env")
                 }
-                console.log(reminderTime,"reminder time")
+                console.log(reminderTime, "reminder time")
                 const dif = (reminderTime - currentTime) / 60000
                 // console.log(dif)
+                // send to expiredArr
                 if (dif < 0) {
-                    // console.log("Expired Events")
-                    return expired.push(el)
-
-
+                    // console.log("expiredArr notifyArr")
+                    return expiredArr.push(el)
                 } if (dif >= 0 && dif <= 5) {
-                    return events.push(el)
-
-
+                    // send to 
+                    return notifyArr.push(el)
                 }
             });
 
-
-            if (events.length) {
-                console.log("++++++++++++++++\nREMINDERS TO SEND OFF", events)
-
-                // mutate array, when empty it will stop
-                // setInterval(function () {
-
-                //     console.log("expired events", expired)
-                //     console.log("Upcoming events!", events)
-                //     console.log('USER INFO', userArray)
-                //     // if (reminderArr.length) {
-                //     //     // NEED TO MUTATE DATA LIST NEVER ENDS
-                //     //     reminderArr.forEach(el => {
-                //     //         const reminderTime = ((new Date(el.before).getTime()));
-                //     //         const dif = (reminderTime - currentTime) / 60000
-                //     //         console.log(dif)
-                //     //         if (dif < 0) {
-                //     //             // console.log("Expired Events")
-                //     //             expired.push(el)
-
-
-                //     //         } if (dif >= 0 && dif <= 5) {
-                //     //             events.push(el)
-
-
-                //     //         }
-                //     //     });
-                //     // }
-                //     // console.log("timer is running")
-                //     // console.log("events", events)
-                //     // if (events.length) {
-                //     //     for (let i = 0; i < events.length; i++) {
-                //     //         const el = events[i];
-                //     //         notifying.push(el);
-                //     //     }
-                //     //     console.log(notifying, "Notifications to be sent")
-                //     // }
-                // }, 60000)
+            // if notifications filter users to get ph
+            if (notifyArr.length) {
+                // console.log("++++++++++++++++\nREMINDERS TO SEND OFF", notifyArr)
+                console.log('USER ARRAY', userArray);
+                console.log("+++++++++++\n");
+                console.log(notifyArr, "NOTIFICATIONS");
             }
 
-            if (expired.length) {
-                console.log("++++++++++++++++\nEXPIRED!, SEND FOR DELETION", expired)
+            // if expired send to be deleted
+            if (expiredArr.length) {
+                console.log("++++++++++++++++\nEXPIRED!, SEND FOR DELETION", expiredArr)
             }
         }
         // check the arrays next

@@ -102,7 +102,7 @@ class Remind {
             reminderArr.forEach(el => {
                 let reminderTime = ((new Date(el.before).getTime()));
                 if (!process.env.DEV) {
-                    return reminderTime -= 14400000
+                    reminderTime -= 14400000
                 }
                 console.log(reminderTime,"reminder time")
                 const dif = (reminderTime - currentTime) / 60000

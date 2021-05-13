@@ -100,28 +100,32 @@ class Remind {
             // NEED TO MUTATE DATA LIST NEVER ENDS
             console.log('EVENTS FOUND!')
             reminderArr.forEach(el => {
-                const reminderTime = ((new Date(el.before).getTime()));
+                let reminderTime = ((new Date(el.before).getTime()));
+                if (!process.env.DEV) {
+                    return reminderTime -= 14400000
+                }
+                console.log(reminderTime,"reminder time")
                 const dif = (reminderTime - currentTime) / 60000
                 // console.log(dif)
                 if (dif < 0) {
                     // console.log("Expired Events")
-                   return expired.push(el)
+                    return expired.push(el)
 
 
                 } if (dif >= 0 && dif <= 5) {
-                   return events.push(el)
+                    return events.push(el)
 
 
                 }
             });
-        
+
 
             if (events.length) {
                 console.log("++++++++++++++++\nREMINDERS TO SEND OFF", events)
 
                 // mutate array, when empty it will stop
                 // setInterval(function () {
-    
+
                 //     console.log("expired events", expired)
                 //     console.log("Upcoming events!", events)
                 //     console.log('USER INFO', userArray)
@@ -134,12 +138,12 @@ class Remind {
                 //     //         if (dif < 0) {
                 //     //             // console.log("Expired Events")
                 //     //             expired.push(el)
-    
-    
+
+
                 //     //         } if (dif >= 0 && dif <= 5) {
                 //     //             events.push(el)
-    
-    
+
+
                 //     //         }
                 //     //     });
                 //     // }
@@ -155,12 +159,12 @@ class Remind {
                 // }, 60000)
             }
 
-            if(expired.length){
-                console.log("++++++++++++++++\nEXPIRED!, SEND FOR DELETION",expired)
+            if (expired.length) {
+                console.log("++++++++++++++++\nEXPIRED!, SEND FOR DELETION", expired)
             }
         }
         // check the arrays next
-       
+
         // THIS WORKS NEED TO MOVE THE TIMER TO THE SERVER FILE SO IT IS ALWAYS FRESH DATA
 
     }

@@ -102,7 +102,10 @@ class Remind {
             reminderArr.forEach(el => {
                 let reminderTime = ((new Date(el.before).getTime()));
                 if (!process.env.DEV) {
+                    console.log("SERVER ENVIRONMENT")
                     reminderTime -= 14400000
+                }else{
+                    console.log("LOCAL ENVIRONMENT")
                 }
                 console.log(reminderTime,"reminder time")
                 const dif = (reminderTime - currentTime) / 60000

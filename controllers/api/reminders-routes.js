@@ -74,11 +74,12 @@ router.get('/:id', (req, res) => {
 
 
 router.post('/', (req, res) => {
-    console.log(req.body)
+
     Reminders.create({
         user_id: req.session.user_id,
         event_id: req.body.event_id,
         before: req.body.before,
+        starts_in: req.body.starts_in
     })
         .then(dbRemindData => res.status(200).json(dbRemindData))
         .catch(err => {

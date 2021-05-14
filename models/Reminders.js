@@ -31,7 +31,11 @@ Reminders.init(
         before: {
             type: DataTypes.DATE,
             allowNull: false
-        }
+        },
+        starts_in: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
     },
     {
         sequelize,

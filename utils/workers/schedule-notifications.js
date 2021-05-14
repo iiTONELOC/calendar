@@ -1,14 +1,15 @@
 
 const fetch = require('node-fetch');
 const CalRender = require('../../utils/render-calendar');
-const m = CalRender.currentMonth();
-const d = CalRender.currentDay();
-const y = CalRender.currentYear();
-const moment = require('moment');
-const tm = moment;
+// const m = CalRender.currentMonth();
+// const d = CalRender.currentDay();
+// const y = CalRender.currentYear();
+// const moment = require('moment');
+const Text = require('../../sms/Textmsg');
 require('dotenv').config();
 let url = 'https://my-caltasker.herokuapp.com/';
-const Text = require('../../sms/Textmsg')
+
+
 
 /*
 // check all users with phone numbers, grab notification list,
@@ -119,7 +120,7 @@ class Remind extends Text {
         const userArray = obj.user
         let notifyArr = [];
         let expiredArr = [];
-        let holder =[];
+        let holder = [];
 
         // check for reminders
         if (reminderArr.length) {
@@ -137,29 +138,37 @@ class Remind extends Text {
                 }
             });
 
+            const users = (data) => userArray.filter(el => {
+                if (el.id === data) {
+                    return el.phone_number
+                }
+            })
+
+
             holder.forEach(en => {
                 const currentTime = new Date(Date.now()).getTime();
                 const reminderTime = ((new Date(en.before).getTime()));
-                const dif = (reminderTime - currentTime) / 60000
-                // console.log(dif)
-                // console.log(currentTime)
-                // console.log(reminderTime)
+                const dif = (reminderTime - currentTime) / 60000;
+    
                 if (dif < -.5) {
                     // send to expiredArr
                     return expiredArr.push(en)
-                } if (dif >=-.5 && dif <= 1) {
+                } if (dif >= -.6 && dif <= 1) {
                     // send to notify
+                
                     const data = {
                         id: en.id,
                         user_id: en.user_id,
+                        user_phone: users(en.user_id),
                         event: en.event,
+                        event_start: en.starts_in,
                         remaining: dif
                     }
+                    // console.log(data)
                     notifyArr.push(data)
                 }
             });
 
-            // if notifications filter users to get ph
             if (notifyArr.length) {
                 // console.log("++++++++++++++++\nREMINDERS TO SEND OFF", notifyArr)
                 // console.log('USER ARRAY', userArray);
@@ -167,14 +176,9 @@ class Remind extends Text {
                 // console.log("NOTIFICATIONS", notifyArr);
 
                 const data = {
-                    user: userArray,
                     reminders: notifyArr,
                 };
-            
 
-                // notifyArr.forEach(el=>{
-
-                // })
                 return Text.notify(data);
             } else {
                 console.log("No Reminders need to be sent!")
@@ -183,7 +187,6 @@ class Remind extends Text {
             // if expired send to be deleted
             if (expiredArr.length) {
                 console.log("++++++++++++++++\nEXPIRED!, SEND FOR DELETION",/*, expiredArr*/)
-
             }
         } else {
             return

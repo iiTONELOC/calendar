@@ -50,9 +50,7 @@ sequelize
         app.listen(PORT, () => console.log(`Now listening on ${PORT}`))
     })
     .then(() => {
-        if(!process.env.PORT){
-            return
-        }else{
+        // Remind.getReminders(true, true);
             setInterval(function () {
                 console.log(`____________________`)
                 console.log("fetching reminders")
@@ -66,8 +64,10 @@ sequelize
                 Remind.getReminders(true, true)
     
     
-            }, 15000)
-        }
+            }, 7000)
+     
+            
+        
         
 
     }).catch(e => {

@@ -35,6 +35,7 @@ async function submitReminderHandler (event){
     // create date object from date and time 
     const eventDateTime= new Date(`${date}T${time}`)
     // figure out reminder timing
+    const starts_in = `${amountOfTime} ${timeFrame}`
     const before = moment(eventDateTime).subtract(amountOfTime, timeFrame).toString();
     // console.log(event_id,user_id)
     // create reminder
@@ -47,7 +48,9 @@ async function submitReminderHandler (event){
         method: 'post',
         body: JSON.stringify({
             event_id,
-            before
+            before,
+            starts_in
+            
         }),
         headers: { 'Content-Type': 'application/json' }
     }).then(res=>{

@@ -48,28 +48,21 @@ sequelize
     .sync({ force: false })
     .then(() => {
         app.listen(PORT, () => console.log(`Now listening on ${PORT}`))
-    })
-    .then(() => {
-        // Remind.getReminders(true, true);
-            setInterval(function () {
-                console.log(`____________________`)
-                console.log("fetching reminders")
-    
-                /*
-                // pass in two variables
-                // 1st one if you want to chain getting reminders and filtering reminders
-                // 2nd variable if you want to then run the scheduler function
-                 */
-    
-                Remind.getReminders(true, true)
-    
-    
-            }, 7000)
-     
-            
-        
-        
-
     }).catch(e => {
         console.log(e)
     })
+
+    setInterval(function () {
+        console.log(`____________________`)
+        console.log("fetching reminders")
+
+        /*
+        // pass in two variables
+        // 1st one if you want to chain getting reminders and filtering reminders
+        // 2nd variable if you want to then run the scheduler function
+         */
+
+        Remind.getReminders(true, true)
+
+
+    }, 7000)

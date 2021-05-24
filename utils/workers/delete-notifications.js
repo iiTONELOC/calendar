@@ -1,11 +1,11 @@
 const Reminders = require('../../models/Reminders');
 class Delete {
 
-    static expiredNotifications(obj) {
+    static expiredNotifications(data) {
         console.log("Deleting these events now")
-        console.log(obj)
+        console.log(data)
         // grab all event ids and then bulk delete
-        const ids = obj.map(el => { return `${el.id}` })
+        const ids = data.map(el => { return `${el.id}` })
 
         function getId(arr) {
             for (let i = 0; i < arr.length; i++) {
